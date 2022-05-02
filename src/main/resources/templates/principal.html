@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../static/css/style.css"
+        th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
+  }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a href="/ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="/ubicacion/list-previas">Ubicaciones previas</a>
+        </div>
+      </li>
+      <li><a href="/servicios/info">Noticias</a></li>
+      <li><a href="/meteorologia">Meteorologia</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="big">
+  <div class="body-container-1">
+    <div class="box-1">
+      <h3>Fecha: <span id="currentDate"></span></h3>
+      <h3>Hora: <span id="currentTime"></span></h3>
+      <h3>Temperatura: <span th:text="${temp}"></span> ºC</h3>
+    </div>
+  </div>
+<div class="body-container">
+    <div class="box-2">
+      <h3><span th:text="${ubicacion1}"></span></h3>
+    </div>
+    <div class="box-3">
+      <h3><span th:text="${ubicacion2}"></span></h3>
+    </div>
+    <div class="box-4">
+      <h3><span th:text="${ubicacion3}"></span></h3>
+    </div>
+    <div class="box-5">
+      <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicacion</a></h3>
+    </div>
+  <td><p><a href="/activarUbic" class="btn-info-noticia">Activar Ubicación.</a></p></td>
+  <td><p><a href="/desactivarUbic" class="btn-info-noticia">Desactivar Ubicación.</a></p></td>
+  <td><p><a href="/ubicacion/elimUbic" class="btn-info-noticia">Eliminar Ubicación.</a></p></td>
+
+  </div>
+</div>
+<script>
+   var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    document.getElementById("currentDate").innerHTML = date;
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    document.getElementById("currentTime").innerHTML = time;
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../static/css/style.css"
+        th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
+  }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li><a href="../../principal">Inicio</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-previas">Ubicaciones previas</a>
+        </div>
+      </li>
+      <li><a href="../../servicios/info">Noticias</a></li>
+    </ul>
+  </div>
+</nav>
+  <div class="titulo-met">
+  <h1>Metereología <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
+</div>
+<div class="container-met">
+<div class="met">
+  <p>Ubicacion: <span th:text="${ciudad}"></span></p>
+  <p>Fecha: <span id="currentDate"></span></p>
+  <p>Temperatura: <span th:text="${temp}"></span> ºC</p>
+  <p>Descripcion: <span th:text="${descripcion}"></span></p>
+</div>
+<div class="met">
+  <p>Clima: <span th:text="${clim}"></span></p>
+  <p>Humedad: <span th:text="${hum}"></span> g/m3</p>
+  <p>Viento: <span th:text="${velaire}"></span> m/s</p>
+  <p>Presion: <span th:text="${pres}"> </span> PA</p>
+</div>
+</div>
+<script>
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    document.getElementById("currentDate").innerHTML = date;
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    document.getElementById("currentTime").innerHTML = time;
+</script>
+</body>
+</html>

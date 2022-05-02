@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../static/css/style.css"
+        th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
+  }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li><a href="../../principal">Inicio</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../ubicacion/list-previas">Ubicaciones previas</a>
+        </div>
+      </li>
+      <li><a href="../../servicios/info">Noticias</a></li>
+    </ul>
+  </div>
+</nav>
+  <div class="add-ubic-container">
+    <h1>Ver meteorología</h1>
+    <form action="/servicios/list_met" method="post" class="add-form">
+      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
+      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
+      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Continuar">
+    </form>
+  </div>
+</body>
+</html>

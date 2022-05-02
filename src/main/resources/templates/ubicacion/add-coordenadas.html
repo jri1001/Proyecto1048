@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../static/css/style.css"
+        th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
+  }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li><a href="../../principal">Inicio</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a href="../list-activas">Ubicaciones activas</a>
+          <a href="../list-previas">Ubicaciones previas</a>
+        </div>
+      </li>
+      <li><a href="../../servicios/info">Noticias</a></li>
+      <li><a href="../../servicios/list_met">Meteorologia</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="add-ubic-container">
+  <h1>Añadir ubicación</h1>
+  <form action="/ubicacion/add-coordenadas" method="post" class="add-form">
+    <label for="latitud" class="add-label">Introduce la latitud</label><br>
+    <input class="add-input" type="text" id="latitud" name="latitud" placeholder="Latitud" ><br>
+    <label for="altitud" class="add-label">Introduce la latitud</label><br>
+    <input class="add-input" type="text" id="altitud" name="altitud" placeholder="Altitud" ><br>
+    <label for="alias" class="add-label" >Asigna un alias</label><br>
+    <input class="add-input" type="text" id="alias" name="alias" placeholder="Opcional" ><br><br>
+    <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Añadir">
+  </form>
+</div>
+</body>
+</html>

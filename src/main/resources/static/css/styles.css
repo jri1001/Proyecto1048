@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400&family=Open+Sans:wght@300&display=swap');
+
+body {
+  font-weight: 200;
+  font-size: 16px;
+  background-color: #23364a;
+}
+
+.fondo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.titulo {
+  padding: 65px;
+  color: rgba(214, 214, 214);
+  font-family: "Open Sans";
+  font-size: 44px;
+  font-weight: 380;
+  background-color: rgba(255,255,255,0.0);
+  text-shadow: rgb(27, 27, 27) 0.7px 0 11px;
+}
+
+.titulo--rojo {
+  background-color: rgba(255,255,255,0.0);
+  font-style: italic;
+  color: #ee6452;
+}
+
+.button {
+  display: inline-block;
+  background-color: #ee6957;
+  padding: 1rem 3rem;
+  margin-bottom: 4rem;
+  font-weight: bold;
+  font-size: 1.8rem;
+  font-family: "Open Sans";
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  letter-spacing: 2px;
+  margin-top: 1rem;
+  border-radius: 15px;
+  border: none;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #db5746;
+}
+
+.dark-mode {
+  background-color: rgb(19, 19, 19);
+  color: white;
+}
+.dark-mode-btn {
+  background-color: rgb(192, 190, 190);
+  color: rgb(12, 12, 12);
+}
+
+.dark-mode-text {
+  color: rgb(12, 12, 12);
+}
+
+.dark-mode-btn:hover {
+  background-color: rgb(133, 132, 132);
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+
+.switch {
+margin: 10px;
+  font-size: 20px;
+  height: 1em;
+  width: 2em;
+  background: #BDB9A6;
+  border-radius: 1em;
+}
+
+.switch div {
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  background: #FFF;
+  box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+  -webkit-transition: all 300ms;
+     -moz-transition: all 300ms;
+          transition: all 300ms;
+}
+
+.switch input:checked + div {
+  -webkit-transform: translate3d(100%, 0, 0);
+     -moz-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}

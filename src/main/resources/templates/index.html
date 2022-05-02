@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="../static/css/styles.css"
+          th:href="@{css/styles.css}" rel="stylesheet" media="screen"/>
+    <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn");
+    btn.classList.toggle("dark-mode-btn");
+
+    var text = document.getElementById("titulo--rojo");
+    text.classList.toggle("dark-mode-text");
+  }
+  </script>
+    <title>Nomeca</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
+</head>
+<body>
+
+<div class="fondo">
+    <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+    </label>
+    <h1 class="titulo">Bienvenidos a <span id="titulo--rojo" class="titulo--rojo">Nomeca</span></h1>
+    <a id="btn" class="button" href="/principal">Entrar</a>
+</div>
+</body>
+</html>

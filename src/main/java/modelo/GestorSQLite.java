@@ -4,7 +4,9 @@ import org.sqlite.SQLiteConfig;
 
 import java.io.File;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.Date;
 
 public class GestorSQLite implements IntGestorSQLite{
     private static GestorSQLite gestorSQLite;
@@ -63,6 +65,11 @@ public class GestorSQLite implements IntGestorSQLite{
                 sql="CREATE TABLE UbicacionesRecientes( nombre Varchar(50) PRIMARY KEY, fecha DATETIME, FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
                 stmt.execute(sql);
 
+                sql= "DROP TABLE IF EXISTS MisUbicaciones;";
+                stmt.execute(sql);
+                sql="CREATE TABLE MisUbicaciones( nombre Varchar(50) PRIMARY KEY, fecha DATETIME, FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
+                stmt.execute(sql);
+
                 sql= "DROP TABLE IF EXISTS ServiciosActivos;";
                 stmt.execute(sql);
                 sql="CREATE TABLE ServiciosActivos( nombre Varchar(50) PRIMARY KEY);";
@@ -83,8 +90,6 @@ public class GestorSQLite implements IntGestorSQLite{
     public boolean copyDB(String myUrl) {
         String sql= "ATTACH DATABASE ? AS other;";
         execute(sql,new String[]{myUrl});
-
-
 
         sql= "DETACH ?;";
         return execute(sql,new String[]{myUrl});
@@ -199,7 +204,8 @@ public class GestorSQLite implements IntGestorSQLite{
     }
 
     public boolean addUbicacionPrevia(String toponimo) {
-        String sql="INSERT INTO UbicacionesRecientes VALUES(?);";
+        LocalDate fecha = LocalDate.now();
+        String sql="INSERT INTO UbicacionesRecientes VALUES(?,fecha);";
         return execute(sql,new String[]{formatearToponimo(toponimo)});
     }
 
@@ -284,6 +290,24 @@ public class GestorSQLite implements IntGestorSQLite{
             System.out.println(e.getMessage());
         }
         return listaUbicacionesRecientes;
+    }
+
+    public HashSet<String> getUbicacionesFavoritas() {
+        String sql ="SELECT * FROM MisUbicaciones;";
+        HashSet<String> listaUbicaciones=new HashSet<>();
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()){
+                listaUbicaciones.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return listaUbicaciones;
     }
 
     public HashMap<String, ArrayList<String>> getListaAlias() {

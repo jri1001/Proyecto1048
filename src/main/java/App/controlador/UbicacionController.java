@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 
 @Controller
@@ -62,6 +62,15 @@ public class UbicacionController {
         model.addAttribute("ubicacionesPrevias", gestorSQLite.getListaUbicacionesRecientes());
 
         return "ubicacion/list-previas";
+    }
+
+    @RequestMapping("/ubicacion/mis-ubicaciones")
+    public String misUbicaciones(Model model){
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        gestorSQLite.connect();
+        model.addAttribute("ubicaciones", gestorSQLite.getUbicacionesFavoritas());
+
+        return "ubicacion/list-activas";
     }
 
     @RequestMapping("/ubicacion/elimUbic")

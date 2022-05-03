@@ -17,6 +17,7 @@ public class IndexController {
 
         GestorSQLite gestorSQLite = new GestorSQLite();
         GestorOpenWeather gestorOpenWeather = new GestorOpenWeather();
+        //gestorSQLite.crearDB("proyecto.db");
         gestorSQLite.connect();
 
         String top = gestorSQLite.formatearToponimo("Castellón de la plana");

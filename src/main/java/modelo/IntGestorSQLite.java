@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,7 +24,9 @@ public interface IntGestorSQLite {
     Ubicacion getUbicacion(String[] coordenadas);
     boolean deleteUbicacion(String toponimo);
     boolean deleteUbicacionReciente(String toponimo);
-    boolean addUbicacionPrevia(String toponimo);
+    boolean addUbicacionPrevia(String toponimo,String fecha);
+    boolean addUbicacionFavorita(String toponimo, String fecha);
+    boolean deleteUbicacionFavorita(String toponimo);
     String deleteUbicacionRecienteMasAntigua();
     boolean clearUbicaciones();
     List<Ubicacion>getListaUbicaciones();

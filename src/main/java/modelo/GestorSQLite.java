@@ -62,12 +62,12 @@ public class GestorSQLite implements IntGestorSQLite{
 
                 sql= "DROP TABLE IF EXISTS UbicacionesRecientes;";
                 stmt.execute(sql);
-                sql="CREATE TABLE UbicacionesRecientes( nombre Varchar(50) PRIMARY KEY, fecha DATETIME, FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
+                sql="CREATE TABLE UbicacionesRecientes( nombre Varchar(50) PRIMARY KEY, fecha Varchar(20), FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
                 stmt.execute(sql);
 
                 sql= "DROP TABLE IF EXISTS MisUbicaciones;";
                 stmt.execute(sql);
-                sql="CREATE TABLE MisUbicaciones( nombre Varchar(50) PRIMARY KEY, fecha DATETIME, FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
+                sql="CREATE TABLE MisUbicaciones( nombre Varchar(50) PRIMARY KEY, fecha Varchar(20), FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
                 stmt.execute(sql);
 
                 sql= "DROP TABLE IF EXISTS ServiciosActivos;";
@@ -203,10 +203,21 @@ public class GestorSQLite implements IntGestorSQLite{
         return execute(sql,new String[]{formatearToponimo(toponimo)});
     }
 
-    public boolean addUbicacionPrevia(String toponimo) {
-        LocalDate fecha = LocalDate.now();
-        String sql="INSERT INTO UbicacionesRecientes VALUES(?,fecha);";
+    public boolean deleteUbicacionFavorita(String toponimo) {
+        String sql="DELETE FROM MisUbicaciones WHERE nombre=?;";
         return execute(sql,new String[]{formatearToponimo(toponimo)});
+    }
+
+    public boolean addUbicacionPrevia(String toponimo, String fecha){
+        String sql="INSERT INTO UbicacionesRecientes VALUES(?,?);";
+        String topo = formatearToponimo(toponimo);
+        return execute(sql,new String[]{topo,fecha});
+    }
+
+    public boolean addUbicacionFavorita(String toponimo, String fecha){
+        String sql="INSERT INTO MisUbicaciones VALUES(?,?);";
+        String topo = formatearToponimo(toponimo);
+        return execute(sql,new String[]{topo,fecha});
     }
 
     public String deleteUbicacionRecienteMasAntigua() {
@@ -215,7 +226,6 @@ public class GestorSQLite implements IntGestorSQLite{
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-
             // loop through the result set
             toponimo=formatearToponimo(rs.getString("nombre"));
         } catch (SQLException e) {

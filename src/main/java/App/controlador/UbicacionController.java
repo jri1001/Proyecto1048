@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -70,7 +72,17 @@ public class UbicacionController {
         gestorSQLite.connect();
         model.addAttribute("ubicaciones", gestorSQLite.getUbicacionesFavoritas());
 
-        return "ubicacion/list-activas";
+        return "ubicacion/mis-ubicaciones";
+    }
+
+    @RequestMapping("/ubicacion/ubicFavorita")
+    public String UbicacionesFavoritas(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo){
+        LocalDate fecha = LocalDate.now();
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        gestorSQLite.connect();
+        gestorSQLite.addUbicacionFavorita(toponimo,fecha.toString());
+
+        return "ubicacion/ubicFavorita";
     }
 
     @RequestMapping("/ubicacion/elimUbic")
@@ -82,13 +94,24 @@ public class UbicacionController {
         return "/ubicacion/elimUbic";
     }
 
+    @RequestMapping("/ubicacion/deleteUbicFav")
+    public String deleteUbicacionFavorita(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        gestorSQLite.connect();
+        gestorSQLite.deleteUbicacionFavorita(toponimo);
+
+        return "/ubicacion/deleteUbicFav";
+    }
+
+
     @RequestMapping("/desactivarUbic")
     public String desUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String ubicacion){
 
+        LocalDate fecha = LocalDate.now();
         GestorSQLite gestorSQLite = new GestorSQLite();
         gestorSQLite.connect();
         gestorSQLite.desactivarUbicacion(ubicacion);
-        gestorSQLite.addUbicacionPrevia(ubicacion);
+        gestorSQLite.addUbicacionPrevia(ubicacion,fecha.toString());
 
         return "desactivarUbic";
     }

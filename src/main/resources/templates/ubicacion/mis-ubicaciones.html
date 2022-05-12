@@ -42,13 +42,16 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
+<p align="right">
+  <a href="../ubicacion/deleteUbicFav" class="btn-info-noticia">Eliminar ubicación favorita.</a>
+</p>
 <div class="titulo-previas">
   <h1>Ubicaciones Favoritas</h1>
 </div>
 <div class="container-previas">
   <div class="previa">
     <tr th:each="ubic: ${ubicaciones}">
-      <td><p>Ubicacion: <span th:text="${ubic}" ></span></p></td>
+      <td><p>Ubicacion Favorita: <span th:text="${ubic}" ></span></p></td>
     </tr>
   </div>
 </div>

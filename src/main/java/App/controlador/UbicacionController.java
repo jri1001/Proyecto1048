@@ -23,9 +23,24 @@ public class UbicacionController {
         return "ubicacion/add";
     }
 
-    @RequestMapping("/ubicacion/add-coordenadas")       //  TODO: falta sincronizar con metodo add gestor sqlite
-    public String addCoordenadas(Model model){
+    @RequestMapping("/ubicacion/add-coordenadas")
+    public String addCoordenadas(@RequestParam(name="latitud",required = false,defaultValue ="") String latitud,@RequestParam(name="longitud",required = false,defaultValue ="") String longitud,@RequestParam(name="alias",required = false,defaultValue ="") String alias,Model model){
         //model.addAttribute("ubicacion", new Ubicacion());
+
+        String coordenadas = latitud + ","+ longitud;
+
+        GestorGeocoding gestorGeocoding = new GestorGeocoding();
+        Ubicacion ubicacion = gestorGeocoding.peticion(coordenadas);
+
+        GestorSQLite gestorSQLite = new GestorSQLite();
+
+        if(ubicacion != null) {
+            gestorSQLite.addUbicacion(ubicacion);
+            String nombr = ubicacion.getNombre();
+            String ali = gestorSQLite.formatearToponimo(alias);
+            String nom = gestorSQLite.formatearToponimo(nombr);
+            gestorSQLite.addAlias(nom, ali);
+        }
 
         return "ubicacion/add-coordenadas";
     }

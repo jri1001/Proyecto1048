@@ -290,7 +290,19 @@ li.dropdown {
   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
   border-radius: 9px;
   border: none;
-  margin-bottom: 7%;
+  margin-bottom: 5%;
+}
+
+.btn-info-ubic {
+  background-color: #5787ee;
+  text-decoration: none;
+  padding: 0.5rem 6.5rem;
+  font-size: 1rem;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
+  margin-bottom: 5%;
 }
 
 .add-input {

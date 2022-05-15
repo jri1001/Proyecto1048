@@ -16,6 +16,8 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
   }
   </script>
   <title>Nomeca</title>
@@ -32,31 +34,24 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../meteorologia">Meteorologia</a></li>
+      <li><a href="../../servicios/list_met">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-<p align="right">
-  <a href="../ubicacion/ubicFavorita" class="btn-add-ubic">Añadir ubicación a favoritos.</a>
-  <a href="../ubicacion/infoUbic" class="btn-info-ubic">Consultar ubicación.</a>
-</p>
-  <div class="titulo-activas">
-  <h1>Ubicaciones activas</h1>
-</div>
-<div class="container-activas">
-<div class="activa">
-  <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <span style="color:orange" th:text="${ubic}" ></span></p></td>
-  </tr>
-</div>
-
-</div>
+  <div class="add-ubic-container">
+    <h1>Consultar Información</h1>
+    <form action="/ubicacion/infoUbicacion" method="post" class="add-form">
+      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
+      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
+      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Ver información">
+    </form>
+  </div>
 </body>
 </html>

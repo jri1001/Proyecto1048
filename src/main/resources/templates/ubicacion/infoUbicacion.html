@@ -9,13 +9,14 @@ http://www.thymeleaf.org ">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" href="../static/css/style.css"
         th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script>
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    var btn = document.getElementById("btn-add-ubic");
+    btn.classList.toggle("dark-mode-btn");
   }
   </script>
   <title>Nomeca</title>
@@ -32,31 +33,31 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
-          <a href="../ubicacion/list-previas">Ubicaciones previas</a>
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-<p align="right">
-  <a href="../ubicacion/ubicFavorita" class="btn-add-ubic">Añadir ubicación a favoritos.</a>
-  <a href="../ubicacion/infoUbic" class="btn-info-ubic">Consultar ubicación.</a>
-</p>
-  <div class="titulo-activas">
-  <h1>Ubicaciones activas</h1>
+  <div class="titulo-met">
+  <h1>Información <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>
-<div class="container-activas">
-<div class="activa">
-  <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <span style="color:orange" th:text="${ubic}" ></span></p></td>
-  </tr>
+<div class="container-met">
+<div class="met">
+  <p>Ciudad: <span style="color:orange" th:text="${ciudad}"></span></p>
+  <p>Provincia: <span style="color:orange" th:text="${provincia}"></span></p>
+  <p>Código postal: <span style="color:orange" th:text="${codigo}"></span></p>
 </div>
-
+<div class="met">
+  <p>Longitud: <span style="color:orange" th:text="${longitud}"></span></p>
+  <p>Latitud: <span style="color:orange" th:text="${latitud}"></span></p>
+  <p>Alias: <span style="color:orange" th:text="${alias}"></span></p>
 </div>
+</div>
+<h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h2>
 </body>
 </html>

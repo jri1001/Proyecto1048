@@ -148,7 +148,7 @@ public class GestorSQLite implements IntGestorSQLite{
     }
 
     public Ubicacion getUbicacion(String toponimo){
-        String sql ="SELECT * from Ubicacion WHERE nombre="+formatearToponimo(toponimo)+";";
+        String sql ="SELECT * from Ubicacion WHERE nombre= '"+formatearToponimo(toponimo)+"';";
         Ubicacion ubicacion=null;
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -158,6 +158,7 @@ public class GestorSQLite implements IntGestorSQLite{
             ubicacion=new Ubicacion();
             ubicacion.setNombre(rs.getString("nombre"));
             ubicacion.setCiudad(rs.getString("ciudad"));
+            System.out.printf("Nombre de la ciudad: " + ubicacion.getCiudad());
             ubicacion.setCod_postal(rs.getString("cod_postal"));
             ubicacion.setProvincia(rs.getString("provincia"));
             ubicacion.setLongitud(rs.getString("longitud"));
@@ -191,6 +192,23 @@ public class GestorSQLite implements IntGestorSQLite{
             System.out.println(e.getMessage());
         }
         return ubicacion;
+    }
+
+    public String getAlias(String toponimo){
+        String sql ="SELECT * from Alias WHERE nombre= '"+formatearToponimo(toponimo)+"';";
+        String alias ="";
+
+        try (Connection conn = this.connect();
+
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+             alias = rs.getString("alias");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return alias;
     }
 
     public boolean deleteUbicacion(String toponimo){

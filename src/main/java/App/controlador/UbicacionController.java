@@ -63,6 +63,36 @@ public class UbicacionController {
         return "ubicacion/add-toponimo";
     }
 
+    @RequestMapping("/ubicacion/infoUbic")
+    public String infoUbic(){return "ubicacion/infoUbic";}
+
+    @RequestMapping("/ubicacion/infoUbicacion")
+    public String infoUbica(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
+
+        Ubicacion ubic = new Ubicacion();
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        ubic = gestorSQLite.getUbicacion(toponimo);
+
+        if(ubic != null) {
+
+            model.addAttribute("ciudad", ubic.getCiudad());
+            model.addAttribute("provincia", ubic.getProvincia());
+            model.addAttribute("codigo", ubic.getCod_postal());
+            model.addAttribute("longitud", ubic.getLongitud());
+            model.addAttribute("latitud", ubic.getLatitud());
+            model.addAttribute("alias", gestorSQLite.getAlias(toponimo));
+
+            if ( ubic.getNombre()== null || !ubic.getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){
+                String mensajes = "Topónimo incorrecto.Vuelva intentarlo de nuevo.";
+                model.addAttribute("mensaje", mensajes);
+            }
+        }
+
+
+        return "ubicacion/infoUbicacion";
+    }
+
+
     @RequestMapping("/ubicacion/list-activas")
     public String listActivas(Model model){
         GestorSQLite gestorSQLite = new GestorSQLite();

@@ -192,6 +192,16 @@ li.dropdown {
   margin-left: 5%;
   display: flex;
 }
+.blockquote {
+    padding: 60px 80px 40px;
+    flex-direction: column;
+}
+.blockquote p {
+    font-family: "Utopia-italic";
+    font-size: 35px;
+    font-weight: 700px;
+    text-align: center;
+}
 
 .noticia, .activa, .previa {
   background-color: rgba(255,255,255,0.2);
@@ -261,6 +271,14 @@ li.dropdown {
   flex-direction: column;
   align-items: flex-start;
   margin-left: 7%;
+}
+.buscar-evento-container {
+  margin-left: 5%;
+  border-radius: 15px;
+  flex-direction: column;
+  background-color: rgba(255,255,255,0.2);
+  text-align: center;
+  width: 30%;
 }
 
 .btn-add-ubic {

@@ -39,6 +39,7 @@ http://www.thymeleaf.org ">
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
+      <li><a href="../../servicios/eventos">Eventos</a></li>
     </ul>
   </div>
 </nav>
@@ -47,16 +48,16 @@ http://www.thymeleaf.org ">
 </div>
 <div class="container-met">
 <div class="met">
-  <p>Ubicacion: <span th:text="${ciudad}"></span></p>
-  <p>Fecha: <span id="currentDate"></span></p>
-  <p>Temperatura: <span th:text="${temp}"></span> ºC</p>
-  <p>Descripcion: <span th:text="${descripcion}"></span></p>
+  <p>Ubicacion: <span style="color:orange" th:text="${ciudad}"></span></p>
+  <p>Fecha: <span style="color:orange" id="currentDate"></span></p>
+  <p>Temperatura: <span style="color:orange" th:text="${temp}"></span> ºC</p>
+  <p>Descripcion: <span style="color:orange" th:text="${descripcion}"></span></p>
 </div>
 <div class="met">
-  <p>Clima: <span th:text="${clim}"></span></p>
-  <p>Humedad: <span th:text="${hum}"></span> g/m3</p>
-  <p>Viento: <span th:text="${velaire}"></span> m/s</p>
-  <p>Presion: <span th:text="${pres}"> </span> PA</p>
+  <p>Clima: <span style="color:orange" th:text="${clim}"></span></p>
+  <p>Humedad: <span style="color:orange" th:text="${hum}"></span> g/m3</p>
+  <p>Viento: <span style="color:orange" th:text="${velaire}"></span> m/s</p>
+  <p>Presion: <span style="color:orange" th:text="${pres}"> </span> PA</p>
 </div>
 </div>
 <script>

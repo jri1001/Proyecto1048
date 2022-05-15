@@ -73,7 +73,7 @@ public class GestorGeocoding implements IntGestorGeocoding{
         String myUrl="http://geocode.xyz/"+toponimo+"?json=1&region=ES";
         Map<String, Object> respMap = conexion(myUrl);
 
-        if(respMap==null || respMap.get("error")!=null){ return null;} // respMap.get("error") !=null  delvuelve  error={code="007", description="Supply a valid query."} y no se por que
+        if(respMap==null || respMap.get("error")!=null){ return null;}
         Map<String, Object> standard;
         if(respMap.get("osmtags") == null){
             standard=jsonToMap(respMap.get("standard").toString());

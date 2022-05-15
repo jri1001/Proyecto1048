@@ -3,6 +3,7 @@ package App.controlador;
 import modelo.GestorNewsDataIO;
 import modelo.GestorOpenWeather;
 import modelo.GestorSQLite;
+import modelo.GestorTicketMaster;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,6 +81,87 @@ public class ServicioController {
 
         return "servicios/info";
     }
+
+    @RequestMapping("/servicios/eventos")
+    public String eventos (Model model){
+
+        GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
+        ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion("valencia");
+
+        if(eventos != null ||  2 < eventos.size()){
+
+            /* Se muestran 3 eventos */
+            HashMap<String, String> even1 = eventos.get(0);
+            model.addAttribute("name", even1.get("Event name"));
+            model.addAttribute("type", even1.get("Type"));
+            model.addAttribute("location", even1.get("Location"));
+            model.addAttribute("info", even1.get("Information"));
+
+            HashMap<String, String> even2 = eventos.get(1);
+            model.addAttribute("nam", even2.get("Event name"));
+            model.addAttribute("typ", even2.get("Type"));
+            model.addAttribute("locatio", even2.get("Location"));
+            model.addAttribute("inf", even2.get("Information"));
+
+            HashMap<String, String> even3 = eventos.get(2);
+            model.addAttribute("nom", even3.get("Event name"));
+            model.addAttribute("tip", even3.get("Type"));
+            model.addAttribute("local", even3.get("Location"));
+            model.addAttribute("infor", even3.get("Information"));
+        }
+
+        return "servicios/eventos";
+    }
+
+    @RequestMapping("/servicios/list_event")
+    public String listEventos (@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
+        // TODO: falta sincronizar con gestor sqlite
+        GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
+        ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion(toponimo);
+
+        if(eventos != null ||  1 < eventos.size()){
+
+            /* Se muestran 2 eventos */
+            HashMap<String, String> even1 = new HashMap<>();
+            HashMap<String, String> even2 = new HashMap<>();
+
+            for (HashMap e : eventos ) {
+
+                if(e.get("Location").equals(toponimo) && even1.isEmpty()){
+                        even1=e;
+                }
+                if(e.get("Location").equals(toponimo) && even2.isEmpty()){
+                    even2=e;
+                    if(even2.get("Event name").equals(even1.get("Event name"))){
+                         even2 = new HashMap<>();
+                    }
+                }
+            }
+
+            model.addAttribute("name", even1.get("Event name"));
+            model.addAttribute("type", even1.get("Type"));
+            model.addAttribute("location", even1.get("Location"));
+            model.addAttribute("info", even1.get("Information"));
+
+            model.addAttribute("nam", even2.get("Event name"));
+            model.addAttribute("typ", even2.get("Type"));
+            model.addAttribute("locatio", even2.get("Location"));
+            model.addAttribute("inf", even2.get("Information"));
+
+            model.addAttribute("top",toponimo);
+
+            if(even2.isEmpty() || even1.isEmpty()){
+                String mensajes = "No hay eventos disponibles";
+                model.addAttribute("mensaje",mensajes);
+            }
+
+        }
+
+
+
+        return "servicios/list_event";
+    }
+
 
     @RequestMapping("/meteorologia")
     public String Meteorologia(Model model) {

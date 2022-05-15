@@ -16,8 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
+    var btn = document.getElementsByClassName("btn-info-noticia");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -34,27 +37,35 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
-          <a href="../ubicacion/list-previas">Ubicaciones previas</a>
-          <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-previas">Ubicaciones previas</a>
+            <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../../servicios/list_met">Meteorologia</a></li>
+      <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-  <div class="titulo-add">
-    <h1>Añadir ubicacion</h1>
-  </div>
-  <div class="add-container">
-    <div class="addbox-1">
-      <h3><a href="../../ubicacion/add-toponimo">+<br>Añadir por toponimo</a></h3>
-    </div>
-    <div class="addbox-2">
-      <h3><a href="../../ubicacion/add-coordenadas">+<br>Añadir por coordenadas</a></h3>
-    </div>
-  </div>
+  <div class="titulo-noticias">
+  <h1>Eventos en <span th:text="${top}"></span></h1>
+    <h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h2>
+</div>
+
+<blockquote class="blckquoteo">
+  <p align="left">&nbsp &nbsp &nbsp Nombre: <span th:text="${name}"></span><br />
+    &nbsp &nbsp &nbsp Tipo: <span th:text="${type}"></span><br />
+    &nbsp &nbsp &nbsp Localidad: <span th:text="${location}"></span><br />
+    &nbsp &nbsp &nbsp Informacion: <span th:text="${info}"></span></p><br />
+</blockquote>
+
+<blockquote class="blckquoteo">
+  <p align="left">&nbsp &nbsp &nbsp Nombre: <span th:text="${nam}"></span><br />
+    &nbsp &nbsp &nbsp Tipo: <span th:text="${typ}"></span><br />
+    &nbsp &nbsp &nbsp Localidad: <span th:text="${locatio}"></span><br />
+    &nbsp &nbsp &nbsp Informacion: <span th:text="${inf}"></span></p><br />
+</blockquote>
+
 </body>
 </html>

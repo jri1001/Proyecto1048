@@ -38,6 +38,7 @@ http://www.thymeleaf.org ">
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
+      <li><a href="../../servicios/eventos">Eventos</a></li>
       <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
@@ -51,7 +52,7 @@ http://www.thymeleaf.org ">
 <div class="container-previas">
   <div class="previa">
     <tr th:each="ubic: ${ubicaciones}">
-      <td><p>Ubicacion Favorita: <span th:text="${ubic}" ></span></p></td>
+      <td><p>Ubicacion Favorita: <span style="color:orange" th:text="${ubic}" ></span></p></td>
     </tr>
   </div>
 </div>

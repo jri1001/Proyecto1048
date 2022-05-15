@@ -15,7 +15,7 @@ import java.util.Map;
 public class GestorTicketMaster extends Servicio {
     private static GestorTicketMaster gestorTicketmaster;
 
-    private GestorTicketMaster() { }
+    public GestorTicketMaster() { }
 
     public static GestorTicketMaster getGestorTicketmaster(){
         if (gestorTicketmaster==null){

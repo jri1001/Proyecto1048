@@ -66,17 +66,56 @@ public class ServicioController {
             model.addAttribute("desc", notic.get("Description"));
             model.addAttribute("fecha", notic.get("Date"));
 
-            HashMap<String, String> noti = noticias.get(1);
-            model.addAttribute("titu", noti.get("Title"));
-            model.addAttribute("lin", noti.get("Link"));
-            model.addAttribute("des", noti.get("Description"));
-            model.addAttribute("fech", noti.get("Date"));
+            if( 1 < noticias.size()) {
+                HashMap<String, String> noti = noticias.get(1);
+                model.addAttribute("titu", noti.get("Title"));
+                model.addAttribute("lin", noti.get("Link"));
+                model.addAttribute("des", noti.get("Description"));
+                model.addAttribute("fech", noti.get("Date"));
 
-            HashMap<String, String> notc = noticias.get(2);
-            model.addAttribute("titul", notc.get("Title"));
-            model.addAttribute("lik", notc.get("Link"));
-            model.addAttribute("descr", notc.get("Description"));
-            model.addAttribute("fec", notc.get("Date"));
+                if( 2 < noticias.size()) {
+                    HashMap<String, String> notc = noticias.get(2);
+                    model.addAttribute("titul", notc.get("Title"));
+                    model.addAttribute("lik", notc.get("Link"));
+                    model.addAttribute("descr", notc.get("Description"));
+                    model.addAttribute("fec", notc.get("Date"));
+                }else{
+                    String e ="";
+                    model.addAttribute("titul",e);
+                    model.addAttribute("lik",e);
+                    model.addAttribute("descr",e);
+                    model.addAttribute("fec",e);
+                }
+            }else{
+                String e ="";
+                model.addAttribute("titu",e);
+                model.addAttribute("lin",e);
+                model.addAttribute("des",e);
+                model.addAttribute("fech",e);
+                model.addAttribute("titul",e);
+                model.addAttribute("lik",e);
+                model.addAttribute("descr",e);
+                model.addAttribute("fec",e);
+
+            }
+        }else{ //En caso de que no haya noticias disponibles
+            String e ="";
+            String mensajes ="No hay noticias en estos momentos";
+
+            model.addAttribute("tit",e);
+            model.addAttribute("link",e);
+            model.addAttribute("desc",e);
+            model.addAttribute("fecha",e);
+            model.addAttribute("titu",e);
+            model.addAttribute("lin",e);
+            model.addAttribute("des",e);
+            model.addAttribute("fech",e);
+            model.addAttribute("titul",e);
+            model.addAttribute("lik",e);
+            model.addAttribute("descr",e);
+            model.addAttribute("fec",e);
+            model.addAttribute("mensaje",mensajes);
+
         }
 
         return "servicios/info";

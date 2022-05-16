@@ -32,9 +32,10 @@ public class GestorNewsDataIO extends Servicio {
         return map;
     }
 
-    public ArrayList<HashMap<String, String>> peticion(String location) {  //cambiar lo que devuelve
-        String API_KEY = "pub_1720d76ce70402502a760bd1c934f2ea0662";
-        String myUrl = "https://newsdata.io/api/1/news?apikey=" + API_KEY;
+    public ArrayList<HashMap<String, String>> peticion(String location) {
+
+        String API_KEY = "pub_7421c00b07c3b0a1ab68df5be83ae037be9f";
+        String myUrl = "https://newsdata.io/api/1/news?apikey=" + API_KEY +"&q=news&country=es";
         ArrayList<HashMap<String, String>> resp = new ArrayList<>();
         try {
             StringBuilder result = new StringBuilder();

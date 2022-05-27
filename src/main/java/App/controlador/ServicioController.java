@@ -1,9 +1,6 @@
 package App.controlador;
 
-import modelo.GestorNewsDataIO;
-import modelo.GestorOpenWeather;
-import modelo.GestorSQLite;
-import modelo.GestorTicketMaster;
+import modelo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 @Controller
 public class ServicioController {
@@ -40,6 +38,57 @@ public class ServicioController {
         model.addAttribute("descripcion",climadescrp);
 
         return "servicios/list_met";
+    }
+
+    @RequestMapping("/servicios/servicios-activos")
+    public String ServiciosActivos(Model model){
+        GestorServicios gestorServicios = new GestorServicios();
+        model.addAttribute("serviciosActivos", gestorServicios.ServiciosActivos());
+
+        return "servicios/servicios-activos";
+    }
+
+    @RequestMapping("/servicios/InfoServicios")
+    public String InfoServicios(Model model) {
+
+        GestorServicios gestorServicios = new GestorServicios();
+
+        Set<String> servicios = gestorServicios.infoServicios().keySet();
+        String name1 =null;
+        String name2 =null;
+        String name3 =null;
+        String name4 =null;
+        String desc1 =null;
+        String desc2 =null;
+        String desc3 =null;
+        String desc4 =null;
+
+        for (String serv : servicios){
+            if(name1==null){
+                name1=serv;
+                desc1=gestorServicios.infoServicios().get(serv);
+            }else if(name2==null){
+                name2=serv;
+                desc2=gestorServicios.infoServicios().get(serv);
+            }else if(name3==null){
+                name3=serv;
+                desc3=gestorServicios.infoServicios().get(serv);
+            }else{
+                name4=serv;
+                desc4=gestorServicios.infoServicios().get(serv);
+            }
+        }
+
+        model.addAttribute("nameserv1",name1);
+        model.addAttribute("descserv1",desc1);
+        model.addAttribute("nameserv2",name2);
+        model.addAttribute("descserv2",desc2);
+        model.addAttribute("nameserv3",name3);
+        model.addAttribute("descserv3",desc3);
+        model.addAttribute("nameserv4",name4);
+        model.addAttribute("descserv4",desc4);
+
+        return "servicios/InfoServicios";
     }
 
     @RequestMapping("/servicios/list_noticias")
@@ -197,14 +246,12 @@ public class ServicioController {
         }
 
 
-
         return "servicios/list_event";
     }
 
 
     @RequestMapping("/meteorologia")
     public String Meteorologia(Model model) {
-        // TODO: falta sincronizar con gestor sqlite
         GestorSQLite gestorSQLite = new GestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
@@ -215,6 +262,58 @@ public class ServicioController {
     @RequestMapping("/meteorologiatopon")
     public String meteorolotop() {
         return "meteorologiatopon";
+    }
+
+
+    @RequestMapping("/servicios/ActivarServicio")
+    public String activarServicio(@RequestParam(name="nombre",required = false,defaultValue ="") String servicio, Model model){
+
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        gestorSQLite.connect();
+
+        boolean activado = gestorSQLite.addServicioActivo(servicio);
+
+        if(activado){
+            String mens = "El servicio se ha activado correctamente";
+            model.addAttribute("mensaje",mens);
+        }else{
+            if(gestorSQLite.getListaServiciosActivos().contains(servicio)){
+                String mens = "Este servicio ya está activo en el sistema";
+                model.addAttribute("mensaje", mens);
+            }
+            if( !servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)){
+                String mens = "Este servicio no está disponible en el sistema";
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = " ";
+                model.addAttribute("mensaje", mens);
+            }
+        }
+
+        return "servicios/ActivarServicio";
+    }
+
+    @RequestMapping("/servicios/desactivarServicio")
+    public String desactivarServicio(@RequestParam(name="nombre",required = false,defaultValue ="") String servicio, Model model){
+
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        gestorSQLite.connect();
+
+        if(!servicio.equals("") && gestorSQLite.getListaServiciosActivos().contains(servicio)){
+            gestorSQLite.deleteServicioActivo(servicio);
+            String mens = "El servicio se ha desactivado correctamente";
+            model.addAttribute("mensaje",mens);
+        }else{
+
+            if( !servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)){
+                String mens = "Este servicio no está disponible en el sistema";
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = " ";
+                model.addAttribute("mensaje", mens);
+            }
+        }
+        return "servicios/desactivarServicio";
     }
 
 }

@@ -1,5 +1,9 @@
 package modelo;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -129,11 +133,32 @@ public class GestorServicios implements IntGestorServicios {
         return false;
     }
 
+
+    public HashSet<String> ServiciosActivos(){
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        String sql ="SELECT * FROM ServiciosActivos;";
+        HashSet<String> servicios=new HashSet<>();
+        try (Connection conn = gestorSQLite.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()){
+                servicios.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return servicios;
+    }
+
     public HashMap<String,String > infoServicios(){
         HashMap<String,String> mapa= new HashMap<>();
         mapa.put("TicketMaster","Proporciona información de eventos relacionados con la ubicación seleccionada. Actualizado diariamente. Para mas información consultar https://www.ticketmaster.es/");
         mapa.put("OpenWeather","Proporciona información del clima de la ubicación seleccionada, incluyendo temperatura, humedad y previsión meteorológica. Actualizado diariamente. Para mas información consultar https://openweathermap.org/");
         mapa.put("NewsDataIO","Proporciona información de noticias relacionadas con la ubicación seleccionada, tanto actual como histórica. Actualizado diariamente. Para mas información consultar https://newsdata.io/");
+        mapa.put("FreeTTS","Sintetizador de voz digital para ayudar a consultar la información del sistema en caso de tener problemas visuales. Para mas información consultar https://es.wikipedia.org/wiki/FreeTTS/");
         return mapa;
     }
 }

@@ -9,14 +9,13 @@ http://www.thymeleaf.org ">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" href="../static/css/style.css"
         th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script>
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
   }
   </script>
   <title>Nomeca</title>
@@ -33,8 +32,8 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
-          <a href="../../ubicacion/list-previas">Ubicaciones previas</a>
+          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
         </div>
       </li>
@@ -47,33 +46,23 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
+      <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-  <div class="titulo-met">
-  <h1>Metereología <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
+<p align="right">
+  <a href="../servicios/desactivarServicio" class="btn-add-ubic">Desactivar servicio.</a>
+</p>
+  <div class="titulo-activas">
+  <h1>Servicios Activos</h1>
 </div>
-<div class="container-met">
-<div class="met">
-  <p>Ubicacion: <span style="color:orange" th:text="${ciudad}"></span></p>
-  <p>Fecha: <span style="color:orange" id="currentDate"></span></p>
-  <p>Temperatura: <span style="color:orange" th:text="${temp}"></span> ºC</p>
-  <p>Descripcion: <span style="color:orange" th:text="${descripcion}"></span></p>
+<div class="container-activas">
+<div class="activa">
+  <tr th:each="serv: ${serviciosActivos}">
+    <td><p>Servicio: <span style="color:orange" th:text="${serv}" ></span></p></td>
+  </tr>
 </div>
-<div class="met">
-  <p>Clima: <span style="color:orange" th:text="${clim}"></span></p>
-  <p>Humedad: <span style="color:orange" th:text="${hum}"></span> g/m3</p>
-  <p>Viento: <span style="color:orange" th:text="${velaire}"></span> m/s</p>
-  <p>Presion: <span style="color:orange" th:text="${pres}"> </span> PA</p>
+
 </div>
-</div>
-<script>
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    document.getElementById("currentDate").innerHTML = date;
-    var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    document.getElementById("currentTime").innerHTML = time;
-</script>
 </body>
 </html>

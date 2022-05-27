@@ -18,6 +18,7 @@ public interface IntGestorServicios {
 
     boolean clearServicios();
     boolean clearServiciosActivos();
+    HashSet<String> ServiciosActivos();
 
     boolean addServicio(String nombre, Servicio servicio);
     boolean deleteServicio(String servicio);

@@ -16,8 +16,6 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
   }
   </script>
   <title>Nomeca</title>
@@ -34,7 +32,7 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
         </div>
@@ -42,23 +40,38 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Servicios</a>
         <div class="dropdown-content">
-          <a href="../../servicios/InfoServicios">Servicios Disponibles</a>
-          <a href="../../servicios/servicios-activos">Servicios activos</a>
+          <a href="/servicios/servicios-activos">Servicios activos</a>
         </div>
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../../servicios/list_met">Meteorologia</a></li>
+      <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-  <div class="add-ubic-container">
-    <h1>Consultar Información</h1>
-    <form action="/ubicacion/infoUbicacion" method="post" class="add-form">
-      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
-      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Ver información">
-    </form>
-  </div>
+<p align="right">
+  <a href="../../servicios/ActivarServicio" class="btn-add-ubic">Activar servicio.</a>
+</p>
+<div class="titulo-noticias">
+  <h1 align="center">Servicios Disponibles</h1>
+</div>
+<blockquote class="blckquoteo">
+  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv1}"></span></h3>
+  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv1}"></span></h3><br />
+</blockquote>
+<blockquote class="blckquoteo">
+  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv2}"></span></h3>
+  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv2}"></span></h3><br />
+</blockquote>
+<blockquote class="blckquoteo">
+  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv3}"></span></h3>
+  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv3}"></span></h3><br />
+</blockquote>
+<blockquote class="blckquoteo">
+  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv4}"></span></h3>
+  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv4}"></span></h3><br />
+</blockquote>
+
+</div>
 </body>
 </html>

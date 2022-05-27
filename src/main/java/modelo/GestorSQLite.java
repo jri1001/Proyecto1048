@@ -21,7 +21,7 @@ public class GestorSQLite implements IntGestorSQLite{
         return gestorSQLite;
     }
 
-    private boolean execute(String sql, String[] parametros){ //Usar si no se requiere un ResultSet. De esta manera se evita inyección de SQL en parametros.
+    boolean execute(String sql, String[] parametros){ //Usar si no se requiere un ResultSet. De esta manera se evita inyección de SQL en parametros.
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             for(int i=0; i<parametros.length;i++){
@@ -70,9 +70,24 @@ public class GestorSQLite implements IntGestorSQLite{
                 sql="CREATE TABLE MisUbicaciones( nombre Varchar(50) PRIMARY KEY, fecha Varchar(20), FOREIGN KEY (nombre) REFERENCES Ubicacion(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
                 stmt.execute(sql);
 
+                sql= "DROP TABLE IF EXISTS ServiciosDisponibles;";
+                stmt.execute(sql);
+                sql="CREATE TABLE ServiciosDisponibles( nombre Varchar(50) PRIMARY KEY);";
+                stmt.execute(sql);
+
+                sql ="INSERT INTO ServiciosDisponibles VALUES('TicketMaster');";
+                stmt.execute(sql);
+                sql ="INSERT INTO ServiciosDisponibles VALUES('NewsDataIO');";
+                stmt.execute(sql);
+                sql ="INSERT INTO ServiciosDisponibles VALUES('OpenWeather');";
+                stmt.execute(sql);
+                sql ="INSERT INTO ServiciosDisponibles VALUES('FreeTTS');";
+                stmt.execute(sql);
+
+
                 sql= "DROP TABLE IF EXISTS ServiciosActivos;";
                 stmt.execute(sql);
-                sql="CREATE TABLE ServiciosActivos( nombre Varchar(50) PRIMARY KEY);";
+                sql="CREATE TABLE ServiciosActivos( nombre Varchar(50) PRIMARY KEY, FOREIGN KEY (nombre) REFERENCES ServiciosDisponibles(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
                 stmt.execute(sql);
 
                 sql= "DROP TABLE IF EXISTS ServiciosUbicacion;";
@@ -364,6 +379,24 @@ public class GestorSQLite implements IntGestorSQLite{
         return mapaAlias;
     }
 
+    public HashSet<String> getListaServiciosDisponibles() {
+        String sql ="SELECT * FROM ServiciosDisponibles;";
+        HashSet<String> listaServiciosDisponibles=new HashSet<>();
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()){
+                listaServiciosDisponibles.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return listaServiciosDisponibles;
+    }
+
     public HashSet<String> getListaServiciosActivos() {
         String sql ="SELECT * FROM ServiciosActivos;";
         HashSet<String> listaServiciosActivos=new HashSet<>();
@@ -379,6 +412,7 @@ public class GestorSQLite implements IntGestorSQLite{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return listaServiciosActivos;
     }
 

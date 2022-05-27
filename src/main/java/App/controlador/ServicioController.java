@@ -18,24 +18,45 @@ public class ServicioController {
 
         GestorOpenWeather gestorOpenWeather = new GestorOpenWeather();
         GestorSQLite gestorSQLite = new GestorSQLite();
+        String topo = gestorSQLite.formatearToponimo(toponimo);
 
-        String top = gestorSQLite.formatearToponimo(toponimo);
-        String city = gestorOpenWeather.peticion(top).get(0).get("City");
-        String temperatura = gestorOpenWeather.peticion(top).get(0).get("Temperature");
-        String humedad = gestorOpenWeather.peticion(top).get(0).get("Humidity");
-        String presion = gestorOpenWeather.peticion(top).get(0).get("Pressure");
-        String velocidadAire = gestorOpenWeather.peticion(top).get(0).get("Velocidad aire");
-        String clima = gestorOpenWeather.peticion(top).get(0).get("Weather");
-        String climadescrp = gestorOpenWeather.peticion(top).get(0).get("Weather description");
+        if(toponimo !="" && gestorSQLite.getListaServiciosActivos().contains("OpenWeather") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
+            String top = gestorSQLite.formatearToponimo(toponimo);
+            String city = gestorOpenWeather.peticion(top).get(0).get("City");
+            String temperatura = gestorOpenWeather.peticion(top).get(0).get("Temperature");
+            String humedad = gestorOpenWeather.peticion(top).get(0).get("Humidity");
+            String presion = gestorOpenWeather.peticion(top).get(0).get("Pressure");
+            String velocidadAire = gestorOpenWeather.peticion(top).get(0).get("Velocidad aire");
+            String clima = gestorOpenWeather.peticion(top).get(0).get("Weather");
+            String climadescrp = gestorOpenWeather.peticion(top).get(0).get("Weather description");
 
 
-        model.addAttribute("ciudad",city);
-        model.addAttribute("temp",temperatura);
-        model.addAttribute("hum",humedad);
-        model.addAttribute("pres",presion);
-        model.addAttribute("velaire",velocidadAire);
-        model.addAttribute("clim",clima);
-        model.addAttribute("descripcion",climadescrp);
+            model.addAttribute("ciudad", city);
+            model.addAttribute("temp", temperatura);
+            model.addAttribute("hum", humedad);
+            model.addAttribute("pres", presion);
+            model.addAttribute("velaire", velocidadAire);
+            model.addAttribute("clim", clima);
+            model.addAttribute("descripcion", climadescrp);
+        }else{
+            String e = " ";
+            model.addAttribute("ciudad", e);
+            model.addAttribute("temp", e);
+            model.addAttribute("hum", e);
+            model.addAttribute("pres", e);
+            model.addAttribute("velaire", e);
+            model.addAttribute("clim", e);
+            model.addAttribute("descripcion", e);
+
+            if(!gestorSQLite.getListaServiciosActivos().contains("OpenWeather")){
+                String serv = "Este servicio no está activado en el sistema.";
+                model.addAttribute("mensaje",serv);
+            }else{
+                String serv = "Ubicación no dada de alta en el sistema.";
+                model.addAttribute("mensaje",serv);
+            }
+
+        }
 
         return "servicios/list_met";
     }
@@ -105,8 +126,9 @@ public class ServicioController {
         // TODO: falta sincronizar con gestor sqlite
         GestorNewsDataIO gestorNewsDataIO = new GestorNewsDataIO();
         ArrayList<HashMap<String, String>> noticias = gestorNewsDataIO.peticion("valencia");
+        GestorSQLite gestorSQLite = new GestorSQLite();
 
-        if(noticias != null ||  0 < noticias.size()){
+        if(noticias != null &&  0 < noticias.size() && gestorSQLite.getListaServiciosActivos().contains("NewsDataIO")){
 
             /* Se muestran 3 noticias */
             HashMap<String, String> notic = noticias.get(0);
@@ -149,7 +171,6 @@ public class ServicioController {
             }
         }else{ //En caso de que no haya noticias disponibles
             String e ="";
-            String mensajes ="No hay noticias en estos momentos";
 
             model.addAttribute("tit",e);
             model.addAttribute("link",e);
@@ -163,7 +184,14 @@ public class ServicioController {
             model.addAttribute("lik",e);
             model.addAttribute("descr",e);
             model.addAttribute("fec",e);
-            model.addAttribute("mensaje",mensajes);
+
+            if(!gestorSQLite.getListaServiciosActivos().contains("NewsDataIO")){
+                String serv = "Este servicio no está activado en el sistema.";
+                model.addAttribute("mensaje",serv);
+            }else{
+                String serv = "No hay noticias disponibles en estos momentos.";
+                model.addAttribute("mensaje",serv);
+            }
 
         }
 
@@ -175,8 +203,9 @@ public class ServicioController {
 
         GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion("valencia");
+        GestorSQLite gestorSQLite = new GestorSQLite();
 
-        if(eventos != null ||  2 < eventos.size()){
+        if(eventos != null &&  2 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster")){
 
             /* Se muestran 3 eventos */
             HashMap<String, String> even1 = eventos.get(0);
@@ -196,6 +225,31 @@ public class ServicioController {
             model.addAttribute("tip", even3.get("Type"));
             model.addAttribute("local", even3.get("Location"));
             model.addAttribute("infor", even3.get("Information"));
+        }else{
+            String mens = " ";
+            model.addAttribute("name", mens);
+            model.addAttribute("type",mens);
+            model.addAttribute("location",mens);
+            model.addAttribute("info",mens);
+
+            model.addAttribute("nam",mens);
+            model.addAttribute("typ",mens);
+            model.addAttribute("locatio",mens);
+            model.addAttribute("inf",mens);
+
+            model.addAttribute("nom",mens);
+            model.addAttribute("tip",mens);
+            model.addAttribute("local",mens);
+            model.addAttribute("infor",mens);
+
+            if(!gestorSQLite.getListaServiciosActivos().contains("TicketMaster")){
+                String serv = "Este servicio no está activado en el sistema";
+                model.addAttribute("mensaje",serv);
+            }else{
+                String serv = "No hay eventos disponibles en este momento";
+                model.addAttribute("mensaje",serv);
+            }
+
         }
 
         return "servicios/eventos";
@@ -206,22 +260,24 @@ public class ServicioController {
         // TODO: falta sincronizar con gestor sqlite
         GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion(toponimo);
+        GestorSQLite gestorSQLite = new GestorSQLite();
+        String topo = gestorSQLite.formatearToponimo(toponimo);
 
-        if(eventos != null ||  1 < eventos.size()){
+        if(eventos != null &&  1 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
 
             /* Se muestran 2 eventos */
             HashMap<String, String> even1 = new HashMap<>();
             HashMap<String, String> even2 = new HashMap<>();
 
-            for (HashMap e : eventos ) {
+            for (HashMap e : eventos) {
 
-                if(e.get("Location").equals(toponimo) && even1.isEmpty()){
-                        even1=e;
+                if (e.get("Location").equals(toponimo) && even1.isEmpty()) {
+                    even1 = e;
                 }
-                if(e.get("Location").equals(toponimo) && even2.isEmpty()){
-                    even2=e;
-                    if(even2.get("Event name").equals(even1.get("Event name"))){
-                         even2 = new HashMap<>();
+                if (e.get("Location").equals(toponimo) && even2.isEmpty()) {
+                    even2 = e;
+                    if (even2.get("Event name").equals(even1.get("Event name"))) {
+                        even2 = new HashMap<>();
                     }
                 }
             }
@@ -236,15 +292,17 @@ public class ServicioController {
             model.addAttribute("locatio", even2.get("Location"));
             model.addAttribute("inf", even2.get("Information"));
 
-            model.addAttribute("top",toponimo);
+            model.addAttribute("top", toponimo);
 
-            if(even2.isEmpty() || even1.isEmpty()){
+        }else{
+            if(!gestorSQLite.getListaServiciosActivos().contains("TicketMaster")) {
+                String mensajes = "Este servicio no está activado en el sistema.";
+                model.addAttribute("mensaje", mensajes);
+            }else{
                 String mensajes = "No hay eventos disponibles";
-                model.addAttribute("mensaje",mensajes);
+                model.addAttribute("mensaje", mensajes);
             }
-
         }
-
 
         return "servicios/list_event";
     }

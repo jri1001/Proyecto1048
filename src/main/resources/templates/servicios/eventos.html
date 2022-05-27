@@ -58,6 +58,8 @@ http://www.thymeleaf.org ">
   <h1>Eventos</h1>
 </div>
 
+<h3>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3>
+
 <blockquote class="blckquoteo">
   <p align="left">&nbsp &nbsp &nbsp Nombre: <span style="color:orange" th:text="${name}"></span><br />
     &nbsp &nbsp &nbsp Tipo: <span style="color:orange" th:text="${type}"></span><br />
@@ -78,6 +80,7 @@ http://www.thymeleaf.org ">
     &nbsp &nbsp &nbsp Localidad: <span style="color:orange" th:text="${local}"></span><br />
     &nbsp &nbsp &nbsp Informacion: <span style="color:orange" th:text="${infor}"></span></p><br />
 </blockquote>
+
 <div class="buscar-evento-container">
   <h1>Eventos en ...</h1>
   <form action="../../servicios/list_event" method="post" class="add-form">

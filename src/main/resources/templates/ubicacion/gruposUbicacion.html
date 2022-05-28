@@ -16,8 +16,6 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
   }
   </script>
   <title>Nomeca</title>
@@ -37,7 +35,6 @@ http://www.thymeleaf.org ">
           <a href="../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
-          <a href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
         </div>
       </li>
       <li class="dropdown">
@@ -53,13 +50,23 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-  <div class="add-ubic-container">
-    <h1>Eliminar ubicación </h1>
-    <form action="/ubicacion/elimUbic" method="post" class="add-form">
-      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
-      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Eliminar">
-    </form>
-  </div>
+<p align="right">
+  <a href="../ubicacion/deleteGrupo" class="btn-add-ubic">Eliminar ubicaciones de un grupo.</a>
+</p>
+  <div class="titulo-activas">
+  <h1>Grupos de Ubicaciones </h1>
+</div>
+<div class="container-activas">
+<div class="activa">
+  <br />
+  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbspGrupo: &nbsp<span style="color:darkorange" th:text="${Visitadas}"></span></h2>
+  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${ubicVisitadas}"></span></h3>
+  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbspGrupo:&nbsp<span style="color:#F0411C" th:text="${NoVisitadas}"></span></h2>
+  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${NoubicVisitadas}"></span></h3>
+  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp Grupo:&nbsp<span style="color:#F05C1C" th:text="${Favoritos}"></span></h2>
+  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${ubicFavoritas}"></span></h3>
+  <br/>
+</div><br/>
+</div>
 </body>
 </html>

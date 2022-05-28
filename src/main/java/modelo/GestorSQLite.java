@@ -85,6 +85,19 @@ public class GestorSQLite implements IntGestorSQLite{
                 stmt.execute(sql);
 
 
+                sql= "DROP TABLE IF EXISTS GruposUbicaciones;";
+                stmt.execute(sql);
+                sql="CREATE TABLE GruposUbicaciones( nombre Varchar(50) PRIMARY KEY, ubicaciones Varchar(400));";
+                stmt.execute(sql);
+
+                sql ="INSERT INTO GruposUbicaciones (nombre,ubicaciones) VALUES('Visitadas',' ');";
+                stmt.execute(sql);
+                sql ="INSERT INTO GruposUbicaciones (nombre,ubicaciones) VALUES('No visitadas',' ');";
+                stmt.execute(sql);
+                sql ="INSERT INTO GruposUbicaciones (nombre,ubicaciones) VALUES('Favoritas',' ');";
+                stmt.execute(sql);
+
+
                 sql= "DROP TABLE IF EXISTS ServiciosActivos;";
                 stmt.execute(sql);
                 sql="CREATE TABLE ServiciosActivos( nombre Varchar(50) PRIMARY KEY, FOREIGN KEY (nombre) REFERENCES ServiciosDisponibles(nombre) ON DELETE CASCADE ON UPDATE CASCADE);";
@@ -152,6 +165,53 @@ public class GestorSQLite implements IntGestorSQLite{
         return execute(sql,new String[]{nombre,alias});
     }
 
+    public boolean addUbicacionGrupo(String ubica,String grupo) {
+
+        Connection con = this.connect();
+        PreparedStatement ps = null;
+        try{
+            String sql ="UPDATE GruposUbicaciones SET ubicaciones ='"+ubica+"'  WHERE nombre ='"+grupo+"';";
+            ps = con.prepareStatement(sql);
+            ps.execute();
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        return true;
+    }
+
+    public String UbicacionGrupo(String grupo, String nombre) {
+        String ubica =" ";
+        String sql ="SELECT * from GruposUbicaciones WHERE nombre = '"+grupo+"';";
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            ubica = rs.getString("ubicaciones");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return ubica+", "+nombre;
+    }
+
+    public boolean clearGrupoUbicaciones(String grupo){
+
+        Connection con = this.connect();
+        PreparedStatement ps = null;
+
+        try{
+            String c ="";
+            String sql ="UPDATE GruposUbicaciones SET ubicaciones ='"+c+"'  WHERE nombre ='"+grupo+"';";
+            ps = con.prepareStatement(sql);
+            ps.execute();
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        return true;
+    }
+
     public boolean desactivarUbicacion(String toponimo){
         String sql ="DELETE FROM UbicacionesActivas WHERE nombre=?;";
         return execute(sql,new String[]{formatearToponimo(toponimo)});
@@ -160,6 +220,25 @@ public class GestorSQLite implements IntGestorSQLite{
     public boolean deleteAlias(String nombre, String alias) {
         String sql ="DELETE FROM Alias WHERE nombre=? AND alias=?;";
         return execute(sql,new String[]{nombre,alias});
+    }
+
+    public HashSet<String> getGrupos(){
+        String sql ="SELECT nombre from GruposUbicaciones;";
+        HashSet<String> grupos = new HashSet<>();
+
+        try (Connection conn = this.connect();
+
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+             while (rs.next()) {
+                grupos.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return grupos;
     }
 
     public Ubicacion getUbicacion(String toponimo){
@@ -173,7 +252,6 @@ public class GestorSQLite implements IntGestorSQLite{
             ubicacion=new Ubicacion();
             ubicacion.setNombre(rs.getString("nombre"));
             ubicacion.setCiudad(rs.getString("ciudad"));
-            System.out.printf("Nombre de la ciudad: " + ubicacion.getCiudad());
             ubicacion.setCod_postal(rs.getString("cod_postal"));
             ubicacion.setProvincia(rs.getString("provincia"));
             ubicacion.setLongitud(rs.getString("longitud"));
@@ -315,6 +393,26 @@ public class GestorSQLite implements IntGestorSQLite{
             System.out.println(e.getMessage());
         }
         return listaUbicacionesActivas;
+    }
+
+    public ArrayList<String> getListaGruposUbicaciones(){
+        String sql ="SELECT * FROM GruposUbicaciones;";
+        ArrayList<String> listaUbicaciones=new ArrayList<>();
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()){
+                listaUbicaciones.add(rs.getString("nombre"));
+                listaUbicaciones.add(rs.getString("ubicaciones"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return listaUbicaciones;
     }
 
     public HashSet<String> getListaUbicacionesRecientes() {

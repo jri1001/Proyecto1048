@@ -34,7 +34,7 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
           <a href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
@@ -49,16 +49,20 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../meteorologia">Meteorologia</a></li>
+      <li><a href="../../servicios/list_met">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
   <div class="add-ubic-container">
-    <h1>Eliminar ubicación </h1>
-    <form action="/ubicacion/elimUbic" method="post" class="add-form">
-      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
-      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Eliminar">
+    <br/>
+    <h2>Añadir ubicación a un grupo</h2>
+    <form action="/ubicacion/add-grupo" method="post" class="add-form">
+      <label for="grupo" class="add-label">Introduce el nombre del grupo</label><br>
+      <input class="add-input" type="text" id="grupo" name="grupo" placeholder="Nombre del Grupo"><br>
+      <label for="toponimo" class="add-label" >Introduce el topónimo</label><br>
+      <input class="add-input" type="text" id="toponimo" name="toponimo" placeholder="Tóponimo"><br><br>
+      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Añadir">
+      <h3>&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3><br/>
     </form>
   </div>
 </body>

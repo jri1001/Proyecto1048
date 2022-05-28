@@ -37,6 +37,7 @@ http://www.thymeleaf.org ">
           <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+          <a href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
         </div>
       </li>
       <li class="dropdown">
@@ -53,11 +54,13 @@ http://www.thymeleaf.org ">
   </div>
 </nav>
   <div class="add-ubic-container">
-    <h1>Ubicación Favorita</h1>
+    <br/>
+    <h2>Añadir Ubicación Favorita</h2>
     <form action="/ubicacion/ubicFavorita" method="post" class="add-form">
       <label for="nombre" class="add-label">Introduce el topónimo</label><br>
       <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
       <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Añadir a favorito">
+      <h3>&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:darkorange" th:text="${mensaje}"></span></h3><br/>
     </form>
   </div>
 </body>

@@ -34,7 +34,7 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a href="../../ubicacion/list-activas">Ubicaciones activas</a>
           <a href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
           <a href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
@@ -49,16 +49,18 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
-      <li><a href="../meteorologia">Meteorologia</a></li>
+      <li><a href="../../servicios/list_met">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
   <div class="add-ubic-container">
-    <h1>Eliminar ubicación </h1>
-    <form action="/ubicacion/elimUbic" method="post" class="add-form">
-      <label for="nombre" class="add-label">Introduce el topónimo</label><br>
-      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Eliminar">
+    <br/>
+    <h2 align="center">Eliminar ubicaciones de un grupo</h2>
+    <form action="/ubicacion/deleteGrupo" method="post" class="add-form">
+      <label for="nombre" class="add-label">Nombre del grupo</label><br>
+      <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Grupo"><br>
+      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Eliminar Ubicaciones">
+      <h3>&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3><br/>
     </form>
   </div>
 </body>

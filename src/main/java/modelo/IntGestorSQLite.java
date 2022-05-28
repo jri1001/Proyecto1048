@@ -36,6 +36,11 @@ public interface IntGestorSQLite {
 
     HashSet<String> getListaServiciosActivos();
     HashMap<String,ArrayList<String>> getListaServiciosUbicacion();
+    String UbicacionGrupo(String grupo, String nombre);
+    boolean addUbicacionGrupo(String nombre,String grupo);
+    boolean clearGrupoUbicaciones(String grupo);
+    ArrayList<String> getListaGruposUbicaciones();
+    HashSet<String> getGrupos();
 
     boolean addServicioActivo(String servicio);
     boolean deleteServicioActivo(String servicio);

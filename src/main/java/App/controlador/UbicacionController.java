@@ -35,31 +35,54 @@ public class UbicacionController {
         GestorSQLite gestorSQLite = new GestorSQLite();
 
         if(ubicacion != null) {
-            gestorSQLite.addUbicacion(ubicacion);
-            String nombr = ubicacion.getNombre();
-            String ali = gestorSQLite.formatearToponimo(alias);
-            String nom = gestorSQLite.formatearToponimo(nombr);
-            gestorSQLite.addAlias(nom, ali);
+            if(gestorSQLite.getUbicacion(new String[]{latitud,longitud}).getNombre() == null ) {
+                gestorSQLite.addUbicacion(ubicacion);
+                String nombr = ubicacion.getNombre();
+                String ali = gestorSQLite.formatearToponimo(alias);
+                String nom = gestorSQLite.formatearToponimo(nombr);
+                gestorSQLite.addAlias(nom, ali);
+                String mens = "La ubicación se añadido al sistema";
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = "La ubicación ya está dada de alta en el sistema";
+                model.addAttribute("mensaje", mens);
+            }
+        }else{
+            if(!latitud.equals("") || !longitud.equals("")){
+                String mens = "La latitud o longitud es inválida.";
+                model.addAttribute("mensaje",mens);
+            }
         }
-
         return "ubicacion/add-coordenadas";
     }
 
     @RequestMapping(value="/ubicacion/add-toponimo")
-    public String addToponimo(@RequestParam(name="nombre",required = false,defaultValue ="") String nombr, @RequestParam(name="alias",required = false,defaultValue ="") String alia) {
+    public String addToponimo(@RequestParam(name="nombre",required = false,defaultValue ="") String nombr, @RequestParam(name="alias",required = false,defaultValue ="") String alia,Model model) {
 
         GestorGeocoding gestorGeocoding = new GestorGeocoding();
         Ubicacion ubicacion = gestorGeocoding.peticion(nombr);
 
         GestorSQLite gestorSQLite = new GestorSQLite();
 
-        if(ubicacion != null) {
-            gestorSQLite.addUbicacion(ubicacion);
-            String ali = gestorSQLite.formatearToponimo(alia);
-            String nom = gestorSQLite.formatearToponimo(nombr);
-            gestorSQLite.addAlias(nom, ali);
-        }
+        if(ubicacion != null ) {
 
+            if(gestorSQLite.getUbicacion(nombr).getNombre() == null ) {
+                gestorSQLite.addUbicacion(ubicacion);
+                String ali = gestorSQLite.formatearToponimo(alia);
+                String nom = gestorSQLite.formatearToponimo(nombr);
+                gestorSQLite.addAlias(nom, ali);
+                String mens = "La ubicación se añadido al sistema";
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = "La ubicación ya está dada de alta en el sistema";
+                model.addAttribute("mensaje", mens);
+            }
+        }else{
+            if(!nombr.equals("")){
+                String mens = "Nombre de ubicación inválido.";
+                model.addAttribute("mensaje",mens);
+            }
+        }
         return "ubicacion/add-toponimo";
     }
 
@@ -170,9 +193,14 @@ public class UbicacionController {
             String mens = "Ubicación añadida a favoritos.";
             model.addAttribute("mensaje",mens);
         }else{
-            if(!toponimo.equals("")){
-                String mens = "Topónimo incorrecto.";
+            if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()== null){
+                String mens = "No se ha podido añadir a favoritos. La ubicación no está activada";
                 model.addAttribute("mensaje", mens);
+            }else{
+                if(!toponimo.equals("")) {
+                    String mens = "Topónimo incorrecto.";
+                    model.addAttribute("mensaje", mens);
+                }
             }
         }
 
@@ -183,8 +211,17 @@ public class UbicacionController {
     public String descUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
         GestorSQLite gestorSQLite = new GestorSQLite();
         gestorSQLite.connect();
-        gestorSQLite.deleteUbicacion(toponimo);
 
+        if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()!=null && gestorSQLite.getUbicacion(toponimo).getNombre().equals(gestorSQLite.formatearToponimo(toponimo))) {
+            gestorSQLite.deleteUbicacion(toponimo);
+            String mens = "La ubicación se ha eliminado del sistema.";
+            model.addAttribute("mensaje", mens);
+        }else{
+            if(!toponimo.equals("")){
+                String mens = "La ubicación no existe en el sistema.";
+                model.addAttribute("mensaje", mens);
+            }
+        }
         return "/ubicacion/elimUbic";
     }
 
@@ -252,17 +289,28 @@ public class UbicacionController {
     }
 
     @RequestMapping("/activarUbic")
-    public String actvUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String ubicacion, Model model){
+    public String actvUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo, Model model){
 
         GestorSQLite gestorSQLite = new GestorSQLite();
         gestorSQLite.connect();
 
-        if(!ubicacion.equals("")){
-            gestorSQLite.activarUbicacion(ubicacion);
-            String mens = "La ubicación se ha activado en el sistema.";
-            model.addAttribute("mensaje", mens);
-        }
+        if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()!=null && gestorSQLite.getUbicacion(toponimo).getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){
 
+            if(!gestorSQLite.getListaUbicacionesActivas().contains(gestorSQLite.formatearToponimo(toponimo))){
+                gestorSQLite.activarUbicacion(toponimo);
+                String mens = "La ubicación se ha activado en el sistema.";
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = "Esta ubicación ya está activa en el sistema.";
+                model.addAttribute("mensaje", mens);
+            }
+
+        }else{
+            if(!toponimo.equals("")){
+                String mens = "La ubicación no está añadida en el sistema.";
+                model.addAttribute("mensaje", mens);
+            }
+        }
         return "activarUbic";
     }
 

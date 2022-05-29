@@ -257,7 +257,6 @@ public class GestorSQLite implements IntGestorSQLite{
             ubicacion.setLongitud(rs.getString("longitud"));
             ubicacion.setLatitud(rs.getString("latitud"));
 
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

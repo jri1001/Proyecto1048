@@ -13,12 +13,15 @@ import java.util.Set;
 @Controller
 public class ServicioController {
 
+
     @RequestMapping("/servicios/list_met")
-    public String listMet(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model) {
+    public String listMet(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,@RequestParam(name="modo",required = false,defaultValue ="") String modo,Model model) throws InterruptedException {
 
         GestorOpenWeather gestorOpenWeather = new GestorOpenWeather();
         GestorSQLite gestorSQLite = new GestorSQLite();
         String topo = gestorSQLite.formatearToponimo(toponimo);
+
+        GestorTTS gestorTTS = new GestorTTS();
 
         if(toponimo !="" && gestorSQLite.getListaServiciosActivos().contains("OpenWeather") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
             String top = gestorSQLite.formatearToponimo(toponimo);
@@ -30,7 +33,6 @@ public class ServicioController {
             String clima = gestorOpenWeather.peticion(top).get(0).get("Weather");
             String climadescrp = gestorOpenWeather.peticion(top).get(0).get("Weather description");
 
-
             model.addAttribute("ciudad", city);
             model.addAttribute("temp", temperatura);
             model.addAttribute("hum", humedad);
@@ -38,6 +40,18 @@ public class ServicioController {
             model.addAttribute("velaire", velocidadAire);
             model.addAttribute("clim", clima);
             model.addAttribute("descripcion", climadescrp);
+
+            if(modo.equals("Si") || modo.equals("si") ){
+                gestorTTS.speak("ciudad");
+                gestorTTS.speak(city);
+                gestorTTS.speak("temperatura");gestorTTS.speak(temperatura);
+                gestorTTS.speak("humedad");gestorTTS.speak(humedad);
+                gestorTTS.speak("Presion");gestorTTS.speak(presion);
+                gestorTTS.speak("Velocidad del aire");gestorTTS.speak(velocidadAire);
+                gestorTTS.speak("clima");gestorTTS.speak(clima);
+                gestorTTS.speak("descripcion");gestorTTS.speak(climadescrp);
+            }
+
         }else{
             String e = " ";
             model.addAttribute("ciudad", e);
@@ -114,7 +128,7 @@ public class ServicioController {
 
     @RequestMapping("/servicios/list_noticias")
     public String listNoticias(Model model){
-        // TODO: falta sincronizar con gestor sqlite
+
         GestorSQLite gestorSQLite = new GestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
@@ -123,7 +137,7 @@ public class ServicioController {
 
     @RequestMapping("/servicios/info")
     public String info (Model model){
-        // TODO: falta sincronizar con gestor sqlite
+
         GestorNewsDataIO gestorNewsDataIO = new GestorNewsDataIO();
         ArrayList<HashMap<String, String>> noticias = gestorNewsDataIO.peticion("valencia");
         GestorSQLite gestorSQLite = new GestorSQLite();
@@ -257,7 +271,7 @@ public class ServicioController {
 
     @RequestMapping("/servicios/list_event")
     public String listEventos (@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
-        // TODO: falta sincronizar con gestor sqlite
+
         GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion(toponimo);
         GestorSQLite gestorSQLite = new GestorSQLite();
@@ -373,5 +387,4 @@ public class ServicioController {
         }
         return "servicios/desactivarServicio";
     }
-
 }

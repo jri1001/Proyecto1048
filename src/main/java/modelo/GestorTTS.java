@@ -7,7 +7,7 @@ public class GestorTTS implements IntGestorTTS{
     private static GestorTTS gestorTTS;
     private Voice voice;
 
-    private GestorTTS() {
+    public GestorTTS() {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         this.voice= VoiceManager.getInstance().getVoice("kevin");
     }
@@ -22,6 +22,6 @@ public class GestorTTS implements IntGestorTTS{
     public void speak(String texto) {
         voice.allocate();
         voice.speak(texto);
-        voice.deallocate();
+        //voice.deallocate(); //Esta comentado porque sino solo deja hacer una peticion de speak
     }
 }

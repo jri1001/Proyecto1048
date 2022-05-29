@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400&family=Open+Sans:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+* {
+  font-family: 'Oxygen', sans-serif;
+}
 body {
   font-weight: 200;
   font-size: 16px;

@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Oxygen', sans-serif;
 }
 body {
   background-color: #23364a;
@@ -13,14 +13,25 @@ body {
   margin: auto;
   overflow: hidden;
 }
+.btn-ubics {
+    float: right;
+    display: flex;
+    flex-direction: column;
+    margin-top: -34%;
+    margin-right: 25%;
+    justify-content: space-between;
+}
 
 #navbar {
   background-color: #e6e6e6;
+  padding-top: 8px;
 }
 
 #navbar ul {
   padding: 0;
   list-style: none;
+  display: flex;
+    flex-direction: row;
 }
 
 #navbar li {
@@ -44,7 +55,6 @@ body {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
 }
 
@@ -58,7 +68,7 @@ li.dropdown {
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 9;
 }
 
 .dropdown-content a {
@@ -106,6 +116,10 @@ li.dropdown {
   color: #db5746;;
 }
 
+.info-temp {
+    text-align: left;
+    margin-left: 25px;
+}
 .box-1 {
   flex: 3;
   margin-right: 9%;
@@ -234,8 +248,10 @@ li.dropdown {
 }
 
 .btn-info-noticia {
+  cursor: pointer;
   background-color: #ee6957;
   text-decoration: none;
+  text-align: center;
   padding: 0.6rem 1rem;
   font-size: 1rem;
   display: inline-flex;
@@ -246,8 +262,23 @@ li.dropdown {
   margin-left: 18%;
 }
 
-.btn-info-noticia:hover, .btn-add-ubic:hover {
-  background-color: #db5746; ; 
+.btn-atras{
+  cursor: pointer;
+  background-color: #ee6957;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  display: inline-flex;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
+  margin-left: 6%;
+}
+
+.btn-info-noticia:hover, .btn-add-ubic:hover, .btn-atras:hover {
+  background-color: #db5746;
 }
 
 .add-ubic-container {
@@ -350,6 +381,7 @@ input:focus {
 .switch {
   display: inline-block;
   font-size: 20px;
+  margin-top: 5px;
   height: 1em;
   width: 2em;
   background: #BDB9A6;

@@ -34,17 +34,17 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="/ubicacion/list-activas">Ubicaciones activas</a>
-          <a href="/ubicacion/list-previas">Ubicaciones previas</a>
-          <a href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
-          <a href="/ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
+          <a style="font-size: 15px;" href="/ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="/ubicacion/list-previas">Ubicaciones previas</a>
+          <a style="font-size: 15px;" href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+          <a style="font-size: 15px;" href="/ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
         </div>
       </li>
       <li class="dropdown">
         <a href="#" class="dropbtn">Servicios</a>
         <div class="dropdown-content">
-          <a href="/servicios/InfoServicios">Servicios Disponibles</a>
-          <a href="/servicios/servicios-activos">Servicios activos</a>
+          <a style="font-size: 15px;" href="/servicios/InfoServicios">Servicios Disponibles</a>
+          <a style="font-size: 15px;" href="/servicios/servicios-activos">Servicios activos</a>
         </div>
       </li>
       <li><a href="/servicios/info">Noticias</a></li>
@@ -53,9 +53,10 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
+<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="add-ubic-container">
     <h1>Activar ubicación</h1>
-    <form action="/activarUbic" method="post" class="add-form">
+    <form action="/" method="post" class="add-form">
       <label for="nombre" class="add-label">Introduce el topónimo</label><br>
       <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Topónimo"><br>
       <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Activar">

@@ -9,9 +9,11 @@ http://www.thymeleaf.org ">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" href="../static/css/style.css"
         th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <script>
     function myFunction() {
     var element = document.body;
@@ -30,35 +32,45 @@ http://www.thymeleaf.org ">
         <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
         </label>
       </div></li>
-      <li class="dropdown">
+      <div class="dropdown">
+      <li>
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a href="/ubicacion/list-activas">Ubicaciones activas</a>
-          <a href="/ubicacion/list-previas">Ubicaciones previas</a>
-          <a href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
-          <a href="/ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
+          <a style="font-size: 15px;" href="/ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="/ubicacion/list-previas">Ubicaciones previas</a>
+          <a style="font-size: 15px;" href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+          <a style="font-size: 15px;" href="/ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
         </div>
       </li>
-      <li class="dropdown">
+      </div>
+      <div class="dropdown">
+      <li >
         <a href="#" class="dropbtn">Servicios</a>
         <div class="dropdown-content">
-          <a href="/servicios/InfoServicios">Servicios Disponibles</a>
-          <a href="/servicios/servicios-activos">Servicios activos</a>
+          <a style="font-size: 15px;" href="/servicios/InfoServicios">Servicios Disponibles</a>
+          <a style="font-size: 15px;" href="/servicios/servicios-activos">Servicios activos</a>
         </div>
       </li>
-      <li><a href="/servicios/info">Noticias</a></li>
-      <li><a href="/meteorologia">Meteorologia</a></li>
-      <li><a href="/servicios/eventos">Eventos</a></li>
+      </div>
+      <div><li><a href="/servicios/info">Noticias</a></li></div>
+      <div><li><a href="/meteorologia">Meteorologia</a></li></div>
+      <div><li><a href="/servicios/eventos">Eventos</a></li></div>
 
     </ul>
   </div>
 </nav>
+<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver al inicio</button>
+
+<div class="general">
 <div class="big">
   <div class="body-container-1">
     <div class="box-1">
-      <h3>Fecha: <span id="currentDate"></span></h3>
-      <h3>Hora: <span id="currentTime"></span></h3>
-      <h3>Temperatura: <span th:text="${temp}"></span> ºC</h3>
+      <h2>Información general</h2>
+      <div class="info-temp">
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-calendar-alt"></i> Fecha: <span id="currentDate"></span></h2>
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-clock"></i> Hora: <span id="currentTime"></span></h2>
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-temperature-high"></i> Temperatura: <span th:text="${temp}"></span> ºC</h2>
+      </div>
     </div>
   </div>
 <div class="body-container">
@@ -72,12 +84,14 @@ http://www.thymeleaf.org ">
       <h3><span th:text="${ubicacion3}"></span></h3>
     </div>
     <div class="box-5">
-      <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicacion</a></h3>
+      <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicación</a></h3>
     </div>
-  <td><p><a href="/activarUbic" class="btn-info-noticia">Activar Ubicación.</a></p></td>
-  <td><p><a href="/desactivarUbic" class="btn-info-noticia">Desactivar Ubicación.</a></p></td>
-  <td><p><a href="/ubicacion/elimUbic" class="btn-info-noticia">Eliminar Ubicación.</a></p></td>
-
+  </div>
+</div>
+  <div class="btn-ubics" >
+    <a href="/activarUbic" class="btn-info-noticia">Activar Ubicación</a> <br>
+    <a href="/desactivarUbic" class="btn-info-noticia">Desactivar Ubicación</a> <br>
+    <a href="/ubicacion/elimUbic" class="btn-info-noticia">Eliminar Ubicación</a>
   </div>
 </div>
 <script>

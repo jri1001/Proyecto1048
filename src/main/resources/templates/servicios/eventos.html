@@ -56,6 +56,8 @@ http://www.thymeleaf.org ">
   </div>
 </nav>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+
+<div id="evento-info">
   <div class="titulo-noticias">
   <h1>Eventos</h1>
 </div>
@@ -82,6 +84,7 @@ http://www.thymeleaf.org ">
     &nbsp &nbsp &nbsp Localidad: <span style="color:orange" th:text="${local}"></span><br />
     &nbsp &nbsp &nbsp Informacion: <span style="color:orange" th:text="${infor}"></span></p><br />
 </blockquote>
+</div>
 
 <div class="buscar-evento-container">
   <h1>Eventos en ...</h1>
@@ -91,7 +94,7 @@ http://www.thymeleaf.org ">
     <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Continuar">
   </form>
 </div>
-<br />
+
 
 </body>
 </html>

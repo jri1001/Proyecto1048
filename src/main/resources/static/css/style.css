@@ -2,12 +2,20 @@
 * {
   font-family: 'Oxygen', sans-serif;
 }
+
 body {
   background-color: #23364a;
   color: beige;
   font-family: "Open Sans";
   margin: 0;
 }
+
+button, input[type=submit] {
+    cursor: pointer;
+}
+
+
+
 .container {
   width: 80%;
   margin: auto;
@@ -277,7 +285,7 @@ li.dropdown {
   margin-left: 6%;
 }
 
-.btn-info-noticia:hover, .btn-add-ubic:hover, .btn-atras:hover {
+.btn-info-noticia:hover, .btn-add-ubic:hover, .btn-atras:hover, .btn-act-serv:hover, .btn-elim-ubic:hover, .btn-add-grupo:hover {
   background-color: #db5746;
 }
 
@@ -310,6 +318,9 @@ li.dropdown {
   background-color: rgba(255,255,255,0.2);
   text-align: center;
   width: 30%;
+  position: absolute;
+  bottom: 300px;
+  right:100px;
 }
 
 .btn-add-ubic {
@@ -322,6 +333,48 @@ li.dropdown {
   border-radius: 9px;
   border: none;
   margin-bottom: 5%;
+}
+
+.btn-act-serv {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 0.6rem 2rem;
+    background-color: #ee6957;
+    text-decoration: none;
+    font-size: 1rem;
+    color: rgb(240, 233, 233);
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    border-radius: 9px;
+    border: none;
+}
+
+.btn-elim-ubic {
+  background-color: #ee6957;
+  text-decoration: none;
+  padding: 0.6rem 3rem;
+  font-size: 1rem;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
+}
+
+.btn-mis-ubic {
+position: absolute;
+margin-left: 50%;
+margin-top: -30px;
+}
+
+.btn-add-grupo {
+  background-color: #5787ee;
+  text-decoration: none;
+  padding: 0.6rem 3rem;
+  font-size: 1rem;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
 }
 
 .btn-info-ubic {
@@ -404,3 +457,28 @@ input:focus {
      -moz-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0);
 }
+
+.text-servc {
+    font-weight: 200;
+}
+
+.div-servc {
+    width: 70%;
+    margin-left: 3%;
+    text-align: justify;
+    background-color:rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding-top: 10px;
+}
+
+#evento-info {
+  width: 50%;
+    margin-left: 3%;
+    text-align: justify;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    margin-top: 2.5%;
+    padding-top: 1px;
+    z-index: 0;
+}
+

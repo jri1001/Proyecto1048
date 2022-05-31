@@ -11,7 +11,7 @@ http://www.thymeleaf.org ">
         th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
   <script>
     function myFunction() {
     var element = document.body;
@@ -51,28 +51,29 @@ http://www.thymeleaf.org ">
   </div>
 </nav>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
-<p align="right">
-  <a href="../../servicios/ActivarServicio" class="btn-add-ubic">Activar servicio.</a>
-</p>
+<a href="../../servicios/ActivarServicio" class="btn-act-serv">Activar servicio</a>
 <div class="titulo-noticias">
   <h1 align="center">Servicios Disponibles</h1>
 </div>
+
+<div class="div-servc">
 <blockquote class="blckquoteo">
-  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv1}"></span></h3>
-  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv1}"></span></h3><br />
+  <h3 class="titulo-servc">Nombre: <span class="text-servc" th:text="${nameserv1}"></span></h3>
+  <h3 class="titulo-servc">Descripción: <span class="text-servc" th:text="${descserv1}"></span></h3><br />
 </blockquote>
 <blockquote class="blckquoteo">
-  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv2}"></span></h3>
-  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv2}"></span></h3><br />
+  <h3 class="titulo-servc">Nombre: <span class="text-servc" th:text="${nameserv2}"></span></h3>
+  <h3 class="titulo-servc">Descripción: <span class="text-servc" th:text="${descserv2}"></span></h3><br />
 </blockquote>
 <blockquote class="blckquoteo">
-  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv3}"></span></h3>
-  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv3}"></span></h3><br />
+  <h3 class="titulo-servc">Nombre: <span class="text-servc" th:text="${nameserv3}"></span></h3>
+  <h3 class="titulo-servc">Descripción: <span class="text-servc" th:text="${descserv3}"></span></h3><br />
 </blockquote>
 <blockquote class="blckquoteo">
-  <h3 style="color:orange" align="center">&nbsp &nbsp &nbsp Nombre: <span style="color:white" th:text="${nameserv4}"></span></h3>
-  <h3 style="color:orange" align="center"> &nbsp &nbsp &nbsp Descripcion: <span style="color:white" th:text="${descserv4}"></span></h3><br />
+  <h3 class="titulo-servc">Nombre: <span class="text-servc" th:text="${nameserv4}"></span></h3>
+  <h3 class="titulo-servc">Descripcion: <span class="text-servc" th:text="${descserv4}"></span></h3><br />
 </blockquote>
+</div>
 
 </div>
 </body>

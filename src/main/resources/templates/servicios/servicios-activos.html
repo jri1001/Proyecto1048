@@ -52,12 +52,12 @@ http://www.thymeleaf.org ">
   </div>
 </nav>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
-<p align="right">
-  <a href="../servicios/desactivarServicio" class="btn-add-ubic">Desactivar servicio.</a>
-</p>
-  <div class="titulo-activas">
+<a href="../servicios/desactivarServicio" class="btn-act-serv">Desactivar servicio</a>
+
+<div class="titulo-activas">
   <h1>Servicios Activos</h1>
 </div>
+
 <div class="container-activas">
 <div class="activa">
   <tr th:each="serv: ${serviciosActivos}">

@@ -11,7 +11,9 @@ http://www.thymeleaf.org ">
         th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
   <script>
     function myFunction() {
     var element = document.body;
@@ -58,25 +60,43 @@ http://www.thymeleaf.org ">
 </nav>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-noticias">
-  <h1>Noticias</h1>
+  <h1 style="margin: auto; text-align: center;"><i class="fas fa-newspaper"></i> Noticias <i class="fas fa-newspaper"></i></h1>
 </div>
 <h3>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3>
-<div class="container-met">
+<div class="container-not">
 
-    <p align="left">Título: <span style="color:orange" th:text="${tit}"></span><br />
-     Link: <span style="color:orange" th:text="${link}"></span><br />
-     Descripción: <span style="color:orange"th:text="${desc}"></span><br />
-     Fecha: <span style="color:orange" th:text="${fecha}"></span></p><br /><br />
+    <div class="noticia-item">
+        <h2>Título</h2>
+        <p th:text="${tit}"></p>
+        <h2>Link</h2>
+        <p th:text="${link}"></p>
+        <h2>Descripción</h2>
+        <p th:text="${desc}"></p>
+        <h2>Fecha</h2>
+        <p th:text="${fecha}"></p>
+    </div>
 
-    <p align="left">Título: <span style="color:orange" th:text="${titu}"></span><br />
-    Link: <span style="color:orange" th:text="${lin}"></span><br />
-    Descripción: <span style="color:orange" th:text="${des}"></span><br />
-    Fecha: <span style="color:orange" th:text="${fech}"></span></p><br />
+    <div class="noticia-item">
+        <h2>Título</h2>
+        <p th:text="${titu}"></p>
+        <h2>Link</h2>
+        <p th:text="${lin}"></p>
+        <h2>Descripción</h2>
+        <p th:text="${des}"></p>
+        <h2>Fecha</h2>
+        <p th:text="${fech}"></p>
+    </div>
 
-    <p align="left">Título: <span style="color:orange" th:text="${titul}"></span><br />
-        Link: <span style="color:orange" th:text="${lik}"></span><br />
-        Descripción: <span style="color:orange" th:text="${descr}"></span><br />
-        Fecha: <span style="color:orange" th:text="${fec}"></span></p><br />
+    <div class="noticia-item">
+        <h2>Título</h2>
+        <p th:text="${titul}"></p>
+        <h2>Link</h2>
+        <p th:text="${lik}"></p>
+        <h2>Descripción</h2>
+        <p th:text="${descr}"></p>
+        <h2>Fecha</h2>
+        <p th:text="${fec}"></p>
+    </div>
 
 </div>
 </body>

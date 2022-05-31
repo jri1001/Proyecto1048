@@ -50,24 +50,32 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<p align="right">
-  <a href="../ubicacion/deleteGrupo" class="btn-add-ubic">Eliminar ubicaciones de un grupo.</a>
-</p>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
-  <div class="titulo-activas">
-  <h1>Grupos de Ubicaciones </h1>
+<div class="btn-mis-ubic2">
+  <a href="../ubicacion/deleteGrupo"  class="btn-elim-ubic">Eliminar ubicaciones de un grupo</a>
 </div>
+
+<div class="titulo-activas">
+  <h1 style="text-align: center;">Grupos de Ubicaciones </h1>
+</div>
+
 <div class="container-activas">
-<div class="activa">
-  <br />
-  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbspGrupo: &nbsp<span style="color:darkorange" th:text="${Visitadas}"></span></h2>
-  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${ubicVisitadas}"></span></h3>
-  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbspGrupo:&nbsp<span style="color:#F0411C" th:text="${NoVisitadas}"></span></h2>
-  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${NoubicVisitadas}"></span></h3>
-  <h2>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp Grupo:&nbsp<span style="color:#F05C1C" th:text="${Favoritos}"></span></h2>
-  <h3>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:#AE5B12" th:text="${ubicFavoritas}"></span></h3>
-  <br/>
-</div><br/>
+
+  <div class="activa">
+    <h3>Grupo <span th:text="${Visitadas}"></span></h3>
+    <h4><span th:text="${ubicVisitadas}"></span></h4>
+  </div>
+
+  <div class="activa">
+    <h4>Grupo <span th:text="${NoVisitadas}"></span></h4>
+    <h4><span th:text="${NoubicVisitadas}"></span></h4>
+  </div>
+
+  <div class="activa">
+    <h3>Grupo <span th:text="${Favoritos}"></span></h3>
+    <h4><span th:text="${ubicFavoritas}"></span></h4>
+  </div>
+
 </div>
 </body>
 </html>

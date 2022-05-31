@@ -54,11 +54,13 @@ public class GestorNewsDataIO extends Servicio {
             ArrayList<Map<String,Object>> listRes= (ArrayList) respMap.get("results");
             for(Map<String, Object> newsMap:listRes){
                 HashMap<String,String> mapa = new HashMap<>();
-                mapa.put("Title", newsMap.get("title").toString());
-                mapa.put("Link", newsMap.get("link").toString());
-                mapa.put("Description", newsMap.get("description").toString());
-                mapa.put("Date", newsMap.get("pubDate").toString());
-                resp.add(mapa);
+                if( newsMap.get("title") != null && newsMap.get("link")!=null && newsMap.get("description")!=null && newsMap.get("pubDate")!=null ){
+                    mapa.put("Title", newsMap.get("title").toString());
+                    mapa.put("Link", newsMap.get("link").toString());
+                    mapa.put("Description", newsMap.get("description").toString());
+                    mapa.put("Date", newsMap.get("pubDate").toString());
+                    resp.add(mapa);
+                }
             }
 
         } catch (IOException e) {

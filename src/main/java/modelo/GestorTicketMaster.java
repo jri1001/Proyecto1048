@@ -34,7 +34,7 @@ public class GestorTicketMaster extends Servicio {
 
     public ArrayList<HashMap<String, String>> peticion(String location) {
         String API_KEY = "FKM66NQuNZ4k6GAAEJWl57l2tYDQ7VTA";
-        String myUrl = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=ES&keyword=" + location + "&apikey=" + API_KEY;
+        String myUrl = "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=ES&city=" + location + "&apikey=" + API_KEY + "&locale=es";
         ArrayList<HashMap<String, String>> resp = new ArrayList<>();
 
         try {
@@ -61,6 +61,7 @@ public class GestorTicketMaster extends Servicio {
                     mapa.put("Location", eventsMap.get("locale").toString());
                     if(eventsMap.get("info") != null)
                         mapa.put("Information", eventsMap.get("info").toString());
+                    else mapa.put("Information", "No hay información de momento.");
                     resp.add(mapa);
                 }
             }

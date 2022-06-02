@@ -216,7 +216,7 @@ public class ServicioController {
     public String eventos (Model model){
 
         GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
-        ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion("valencia");
+        ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion("");
         GestorSQLite gestorSQLite = new GestorSQLite();
 
         if(eventos != null &&  2 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster")){
@@ -280,10 +280,12 @@ public class ServicioController {
         if(eventos != null &&  1 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
 
             /* Se muestran 2 eventos */
-            HashMap<String, String> even1 = new HashMap<>();
-            HashMap<String, String> even2 = new HashMap<>();
+            HashMap<String, String> even1;
+            HashMap<String, String> even2;
+            even1 = eventos.get(0);
+            even2 = eventos.get(1);
 
-            for (HashMap e : eventos) {
+         /*   for (HashMap e : eventos) {
 
                 if (e.get("Location").equals(toponimo) && even1.isEmpty()) {
                     even1 = e;
@@ -295,6 +297,8 @@ public class ServicioController {
                     }
                 }
             }
+         */
+
 
             model.addAttribute("name", even1.get("Event name"));
             model.addAttribute("type", even1.get("Type"));
@@ -307,14 +311,17 @@ public class ServicioController {
             model.addAttribute("inf", even2.get("Information"));
 
             model.addAttribute("top", toponimo);
+            System.out.println(eventos);
 
         }else{
             if(!gestorSQLite.getListaServiciosActivos().contains("TicketMaster")) {
                 String mensajes = "Este servicio no está activado en el sistema.";
                 model.addAttribute("mensaje", mensajes);
+                model.addAttribute("top", toponimo);
             }else{
                 String mensajes = "No hay eventos disponibles";
                 model.addAttribute("mensaje", mensajes);
+                model.addAttribute("top", toponimo);
             }
         }
 

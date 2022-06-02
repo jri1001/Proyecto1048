@@ -21,7 +21,7 @@ public class IndexController {
         gestorSQLite.connect();
 
         String top = gestorSQLite.formatearToponimo("Castellón de la plana");
-        String temperatura = gestorOpenWeather.peticion(top).get(0).get("Temperature");
+       // String temperatura = gestorOpenWeather.peticion(top).get(0).get("Temperature");
         String ubic1 = "";
         String ubic2 = "";
         String ubic3 = "";
@@ -35,10 +35,22 @@ public class IndexController {
                 ubic3 = e;
             }
         }
+
+        String temp1 = null, temp2 = null, temp3 = null;
+        if(ubic1 != "")
+            temp1 = gestorOpenWeather.peticion(ubic1).get(0).get("Temperature");
+
+        if(ubic2 != "")
+             temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+        if(ubic3 != "")
+            temp3 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+
         model.addAttribute("ubicacion1",ubic1);
         model.addAttribute("ubicacion2",ubic2);
         model.addAttribute("ubicacion3",ubic3);
-        model.addAttribute("temp",temperatura);
+        model.addAttribute("temp1",temp1 + "ºC ("+ubic1+")");
+        model.addAttribute("temp2",temp2 + "ºC ("+ubic2+")");
+        model.addAttribute("temp3",temp3 + "ºC ("+ubic3+")");
 
         return "principal";
     }

@@ -84,7 +84,7 @@ public class ServicioController {
     }
 
     @RequestMapping("/servicios/InfoServicios")
-    public String InfoServicios(Model model) {
+    public String InfoServicios(@RequestParam(name="speech",required = false,defaultValue ="") String modo,Model model) {
 
         GestorServicios gestorServicios = new GestorServicios();
 
@@ -123,6 +123,19 @@ public class ServicioController {
         model.addAttribute("nameserv4",name4);
         model.addAttribute("descserv4",desc4);
 
+        if(modo.equals("Si")){
+            GestorTTS gestorTTS = new GestorTTS();
+            gestorTTS.speak("nombre del servicio");gestorTTS.speak(name1);
+            gestorTTS.speak("descripcion");gestorTTS.speak(desc1);
+            gestorTTS.speak("nombre del servicio");gestorTTS.speak(name2);
+            gestorTTS.speak("descripcion");gestorTTS.speak(desc2);
+            gestorTTS.speak("nombre del servicio");gestorTTS.speak(name3);
+            gestorTTS.speak("descripcion");gestorTTS.speak(desc3);
+            gestorTTS.speak("nombre del servicio");gestorTTS.speak(name4);
+            gestorTTS.speak("descripcion");gestorTTS.speak(desc4);
+
+        }
+
         return "servicios/InfoServicios";
     }
 
@@ -136,7 +149,7 @@ public class ServicioController {
     }
 
     @RequestMapping("/servicios/info")
-    public String info (Model model){
+    public String info (@RequestParam(name="speech",required = false,defaultValue ="") String modo,@RequestParam(name="speech1",required = false,defaultValue ="") String modo1,@RequestParam(name="speech2",required = false,defaultValue ="") String modo2,Model model){
 
         GestorNewsDataIO gestorNewsDataIO = new GestorNewsDataIO();
         ArrayList<HashMap<String, String>> noticias = gestorNewsDataIO.peticion("valencia");
@@ -151,6 +164,14 @@ public class ServicioController {
             model.addAttribute("desc", notic.get("Description"));
             model.addAttribute("fecha", notic.get("Date"));
 
+            if(modo.equals("uno")){
+                GestorTTS gestorTTS = new GestorTTS();
+                gestorTTS.speak("titulo");gestorTTS.speak(notic.get("Title"));
+                gestorTTS.speak("link");gestorTTS.speak(notic.get("Link"));
+                gestorTTS.speak("descripcion");gestorTTS.speak(notic.get("Description"));
+                gestorTTS.speak("fecha");gestorTTS.speak(notic.get("Date"));
+            }
+
             if( 1 < noticias.size()) {
                 HashMap<String, String> noti = noticias.get(1);
                 model.addAttribute("titu", noti.get("Title"));
@@ -158,12 +179,28 @@ public class ServicioController {
                 model.addAttribute("des", noti.get("Description"));
                 model.addAttribute("fech", noti.get("Date"));
 
+                if(modo1.equals("dos")){
+                    GestorTTS gestorTTS = new GestorTTS();
+                    gestorTTS.speak("titulo");gestorTTS.speak(noti.get("Title"));
+                    gestorTTS.speak("link");gestorTTS.speak(noti.get("Link"));
+                    gestorTTS.speak("descripcion");gestorTTS.speak(noti.get("Description"));
+                    gestorTTS.speak("fecha");gestorTTS.speak(noti.get("Date"));
+                }
+
                 if( 2 < noticias.size()) {
                     HashMap<String, String> notc = noticias.get(2);
                     model.addAttribute("titul", notc.get("Title"));
                     model.addAttribute("lik", notc.get("Link"));
                     model.addAttribute("descr", notc.get("Description"));
                     model.addAttribute("fec", notc.get("Date"));
+
+                    if(modo2.equals("tres")){
+                        GestorTTS gestorTTS = new GestorTTS();
+                        gestorTTS.speak("titulo");gestorTTS.speak(notc.get("Title"));
+                        gestorTTS.speak("link");gestorTTS.speak(notc.get("Link"));
+                        gestorTTS.speak("descripcion");gestorTTS.speak(notc.get("Description"));
+                        gestorTTS.speak("fecha");gestorTTS.speak(notc.get("Date"));
+                    }
                 }else{
                     String e ="";
                     model.addAttribute("titul",e);
@@ -239,6 +276,7 @@ public class ServicioController {
             model.addAttribute("tip", even3.get("Type"));
             model.addAttribute("local", even3.get("Location"));
             model.addAttribute("infor", even3.get("Information"));
+
         }else{
             String mens = " ";
             model.addAttribute("name", mens);

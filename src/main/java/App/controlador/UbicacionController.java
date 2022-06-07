@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+//import jakarta.ws.rs.PathParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -159,6 +160,15 @@ public class UbicacionController {
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
 
         return "ubicacion/list-activas";
+    }
+
+    @RequestMapping("/ubicacion/list-NoActivas")
+    public String listNoActivas(Model model){
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
+        gestorSQLite.connect();
+        model.addAttribute("ubicacionesNoactivas", gestorSQLite.getListaUbicacionesNoActivas());
+
+        return "ubicacion/list-NoActivas";
     }
 
     @RequestMapping("/ubicacion/list-previas")

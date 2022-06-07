@@ -394,6 +394,16 @@ public class GestorSQLite implements IntGestorSQLite{
         return listaUbicacionesActivas;
     }
 
+    public Set<String> getListaUbicacionesNoActivas(){
+        Set<String> ubicaciones = new HashSet<>();
+        for(Ubicacion ciudad : getListaUbicaciones()){
+            String nombre = formatearToponimo(ciudad.getCiudad());
+            ubicaciones.add(nombre);
+        }
+        ubicaciones.removeAll(getListaUbicacionesActivas());
+        return ubicaciones;
+    }
+
     public ArrayList<String> getListaGruposUbicaciones(){
         String sql ="SELECT * FROM GruposUbicaciones;";
         ArrayList<String> listaUbicaciones=new ArrayList<>();

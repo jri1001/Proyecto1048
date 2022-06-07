@@ -33,6 +33,7 @@ http://www.thymeleaf.org ">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
           <a style="font-size: 15px;" href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="../../ubicacion/list-NoActivas">Ubicaciones No activas</a>
           <a style="font-size: 15px;" href="../ubicacion/list-previas">Ubicaciones previas</a>
           <a style="font-size: 15px;" href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
           <a style="font-size: 15px;" href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
@@ -54,8 +55,7 @@ http://www.thymeleaf.org ">
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
 
 <div class="btn-mis-ubic">
-  <a href="../ubicacion/ubicFavorita" class="btn-elim-ubic">Añadir ubicación a favoritos</a>
-  <a href="../ubicacion/infoUbic" class="btn-add-grupo">Consultar ubicación</a>
+  <a href="../ubicacion/ubicFavorita" class="btn-add-grupo">Añadir ubicación a favoritos</a>
 </div>
 
 <div class="titulo-activas">
@@ -64,7 +64,7 @@ http://www.thymeleaf.org ">
 <div class="container-activas">
 <div class="activa">
   <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a></p></td>
+    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a>&nbsp&nbsp<a href="/ubicacion/list-activas" class="btn-atras">Desactivar</a></p></td>
   </tr>
 </div>
 

@@ -37,6 +37,7 @@ http://www.thymeleaf.org ">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
           <a style="font-size: 15px;" href="/ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="/ubicacion/list-NoActivas">Ubicaciones No activas</a>
           <a style="font-size: 15px;" href="/ubicacion/list-previas">Ubicaciones previas</a>
           <a style="font-size: 15px;" href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
           <a style="font-size: 15px;" href="/ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
@@ -78,13 +79,13 @@ http://www.thymeleaf.org ">
   </div>
 <div class="body-container">
     <div class="box-2">
-      <h3><span th:text="${ubicacion1}"></span></h3>
+      <h3><a th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion1}}" style="color:orange" th:text="${ubicacion1}" ></a></h3>
     </div>
     <div class="box-3">
-      <h3><span th:text="${ubicacion2}"></span></h3>
+      <h3><a th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion2}}" style="color:orange" th:text="${ubicacion2}" ></a></h3>
     </div>
     <div class="box-4">
-      <h3><span th:text="${ubicacion3}"></span></h3>
+      <h3><a th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion3}}" style="color:orange" th:text="${ubicacion3}" ></a></h3>
     </div>
     <div class="box-5">
       <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicación</a></h3>

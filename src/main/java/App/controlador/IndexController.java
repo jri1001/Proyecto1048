@@ -37,20 +37,49 @@ public class IndexController {
         }
 
         String temp1 = null, temp2 = null, temp3 = null;
-        if(ubic1 != "")
+        if(ubic1 != ""){
             temp1 = gestorOpenWeather.peticion(ubic1).get(0).get("Temperature");
+            model.addAttribute("ubicacion1",ubic1);
+        }else{
+            ubic1 = " ";
+            model.addAttribute("ubicacion1",ubic1);
+        }
 
-        if(ubic2 != "")
-             temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
-        if(ubic3 != "")
+        if(ubic2 != "") {
+            temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+            model.addAttribute("ubicacion2",ubic2);
+        }else{
+            ubic2 = " ";
+            model.addAttribute("ubicacion2",ubic2);
+
+        }
+        if(ubic3 != "") {
             temp3 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+            model.addAttribute("ubicacion3",ubic3);
+        }else{
+            ubic3 = " ";
+            model.addAttribute("ubicacion3",ubic3);
+        }
 
-        model.addAttribute("ubicacion1",ubic1);
-        model.addAttribute("ubicacion2",ubic2);
-        model.addAttribute("ubicacion3",ubic3);
-        model.addAttribute("temp1",temp1 + "ºC ("+ubic1+")");
-        model.addAttribute("temp2",temp2 + "ºC ("+ubic2+")");
-        model.addAttribute("temp3",temp3 + "ºC ("+ubic3+")");
+
+        if(temp1 != null){
+            model.addAttribute("temp1",temp1 + "ºC ("+ubic1+")");
+        }else{
+            temp1 = " ";
+            model.addAttribute("temp1",temp1 + ubic1);
+        }
+        if(temp2 != null){
+            model.addAttribute("temp2",temp2 + "ºC ("+ubic2+")");
+        }else{
+            temp2 = " ";
+            model.addAttribute("temp2",temp2 + ubic2);
+        }
+        if(temp3 != null){
+            model.addAttribute("temp3",temp3 + "ºC ("+ubic3+")");
+        }else{
+            temp3 = " ";
+            model.addAttribute("temp3",temp3 + ubic3 );
+        }
 
         return "principal";
     }

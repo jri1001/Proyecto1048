@@ -28,8 +28,8 @@ public class TestUbicacionesRecientes {
     @BeforeEach
     public void setupTest(){
         gestorMain.clearUbicaciones();
-        gestorMain.addUbicacion("Valencia");
-        gestorMain.addUbicacion("gandia");
+        gestorMain.activarUbicacion(gestorMain.addUbicacion("Valencia").getNombre());
+        gestorMain.activarUbicacion(gestorMain.addUbicacion("gandia").getNombre());
     }
 
 

@@ -17,11 +17,11 @@ public class ServicioController {
     @RequestMapping("/servicios/list_met")
     public String listMet(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,@RequestParam(name="modo",required = false,defaultValue ="") String modo,Model model) throws InterruptedException {
 
-        GestorOpenWeather gestorOpenWeather = new GestorOpenWeather();
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorOpenWeather gestorOpenWeather = GestorOpenWeather.getGestorOpenWeather();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
         String topo = gestorSQLite.formatearToponimo(toponimo);
 
-        GestorTTS gestorTTS = new GestorTTS();
+        GestorTTS gestorTTS = GestorTTS.getGestorTTS();
 
         if(toponimo !="" && gestorSQLite.getListaServiciosActivos().contains("OpenWeather") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
             String top = gestorSQLite.formatearToponimo(toponimo);
@@ -77,7 +77,7 @@ public class ServicioController {
 
     @RequestMapping("/servicios/servicios-activos")
     public String ServiciosActivos(Model model){
-        GestorServicios gestorServicios = new GestorServicios();
+        GestorServicios gestorServicios = GestorServicios.getGestorServicios();
         model.addAttribute("serviciosActivos", gestorServicios.ServiciosActivos());
 
         return "servicios/servicios-activos";
@@ -86,7 +86,7 @@ public class ServicioController {
     @RequestMapping("/servicios/InfoServicios")
     public String InfoServicios(@RequestParam(name="speech",required = false,defaultValue ="") String modo,Model model) {
 
-        GestorServicios gestorServicios = new GestorServicios();
+        GestorServicios gestorServicios = GestorServicios.getGestorServicios();
 
         Set<String> servicios = gestorServicios.infoServicios().keySet();
         String name1 =null;
@@ -124,7 +124,7 @@ public class ServicioController {
         model.addAttribute("descserv4",desc4);
 
         if(modo.equals("Si")){
-            GestorTTS gestorTTS = new GestorTTS();
+            GestorTTS gestorTTS = GestorTTS.getGestorTTS();
             gestorTTS.speak("nombre del servicio");gestorTTS.speak(name1);
             gestorTTS.speak("descripcion");gestorTTS.speak(desc1);
             gestorTTS.speak("nombre del servicio");gestorTTS.speak(name2);
@@ -142,7 +142,7 @@ public class ServicioController {
     @RequestMapping("/servicios/list_noticias")
     public String listNoticias(Model model){
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
         return "servicios/list_noticias";
@@ -151,9 +151,9 @@ public class ServicioController {
     @RequestMapping("/servicios/info")
     public String info (@RequestParam(name="speech",required = false,defaultValue ="") String modo,@RequestParam(name="speech1",required = false,defaultValue ="") String modo1,@RequestParam(name="speech2",required = false,defaultValue ="") String modo2,Model model){
 
-        GestorNewsDataIO gestorNewsDataIO = new GestorNewsDataIO();
+        GestorNewsDataIO gestorNewsDataIO = GestorNewsDataIO.getGestorNewsDataIO();
         ArrayList<HashMap<String, String>> noticias = gestorNewsDataIO.peticion("valencia");
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
 
         if(noticias != null &&  0 < noticias.size() && gestorSQLite.getListaServiciosActivos().contains("NewsDataIO")){
 
@@ -165,7 +165,7 @@ public class ServicioController {
             model.addAttribute("fecha", notic.get("Date"));
 
             if(modo.equals("uno")){
-                GestorTTS gestorTTS = new GestorTTS();
+                GestorTTS gestorTTS = GestorTTS.getGestorTTS();
                 gestorTTS.speak("titulo");gestorTTS.speak(notic.get("Title"));
                 gestorTTS.speak("link");gestorTTS.speak(notic.get("Link"));
                 gestorTTS.speak("descripcion");gestorTTS.speak(notic.get("Description"));
@@ -180,7 +180,7 @@ public class ServicioController {
                 model.addAttribute("fech", noti.get("Date"));
 
                 if(modo1.equals("dos")){
-                    GestorTTS gestorTTS = new GestorTTS();
+                    GestorTTS gestorTTS = GestorTTS.getGestorTTS();
                     gestorTTS.speak("titulo");gestorTTS.speak(noti.get("Title"));
                     gestorTTS.speak("link");gestorTTS.speak(noti.get("Link"));
                     gestorTTS.speak("descripcion");gestorTTS.speak(noti.get("Description"));
@@ -195,7 +195,7 @@ public class ServicioController {
                     model.addAttribute("fec", notc.get("Date"));
 
                     if(modo2.equals("tres")){
-                        GestorTTS gestorTTS = new GestorTTS();
+                        GestorTTS gestorTTS = GestorTTS.getGestorTTS();
                         gestorTTS.speak("titulo");gestorTTS.speak(notc.get("Title"));
                         gestorTTS.speak("link");gestorTTS.speak(notc.get("Link"));
                         gestorTTS.speak("descripcion");gestorTTS.speak(notc.get("Description"));
@@ -252,9 +252,9 @@ public class ServicioController {
     @RequestMapping("/servicios/eventos")
     public String eventos (Model model){
 
-        GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
+        GestorTicketMaster gestorTicketMaster = GestorTicketMaster.getGestorTicketmaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion("");
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
 
         if(eventos != null &&  2 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster")){
 
@@ -310,9 +310,9 @@ public class ServicioController {
     @RequestMapping("/servicios/list_event")
     public String listEventos (@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
 
-        GestorTicketMaster gestorTicketMaster = new GestorTicketMaster();
+        GestorTicketMaster gestorTicketMaster = GestorTicketMaster.getGestorTicketmaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion(toponimo);
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         String topo = gestorSQLite.formatearToponimo(toponimo);
 
         if(eventos != null &&  1 < eventos.size() && gestorSQLite.getListaServiciosActivos().contains("TicketMaster") && gestorSQLite.getListaUbicacionesActivas().contains(topo)) {
@@ -369,7 +369,7 @@ public class ServicioController {
 
     @RequestMapping("/meteorologia")
     public String Meteorologia(Model model) {
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
 
@@ -385,7 +385,7 @@ public class ServicioController {
     @RequestMapping("/servicios/ActivarServicio")
     public String activarServicio(@RequestParam(name="nombre",required = false,defaultValue ="") String servicio, Model model){
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite =  GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         boolean activado = gestorSQLite.addServicioActivo(servicio);
@@ -413,7 +413,7 @@ public class ServicioController {
     @RequestMapping("/servicios/desactivarServicio")
     public String desactivarServicio(@RequestParam(name="nombre",required = false,defaultValue ="") String servicio, Model model){
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         if(!servicio.equals("") && gestorSQLite.getListaServiciosActivos().contains(servicio)){

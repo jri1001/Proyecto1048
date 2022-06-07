@@ -65,6 +65,9 @@ public class GestorUbicacion implements IntGestorUbicacion {
     }
 
     public boolean activarUbicacion(String toponimo){
+        if(!listaUbicaciones.containsKey(formatearToponimo(toponimo))){
+            return false;
+        }
         return listaUbicacionesActivas.add(formatearToponimo(toponimo));
     }
 
@@ -82,9 +85,6 @@ public class GestorUbicacion implements IntGestorUbicacion {
 
     public Ubicacion getUbicacion(String toponimo){
         Ubicacion ubicacion=listaUbicaciones.get(formatearToponimo(toponimo));
-        if(ubicacion!=null){
-            listaUbicacionesRecientes.add(formatearToponimo(toponimo));
-        }
         return ubicacion;
     }
 

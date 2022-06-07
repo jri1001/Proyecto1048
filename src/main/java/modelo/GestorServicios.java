@@ -25,6 +25,9 @@ public class GestorServicios implements IntGestorServicios {
         this.listaServiciosUbicacion=new HashMap<>();
 
     }
+    public void inject(GestorTicketMaster gestor){listaServicios.put("TicketMaster",gestor);}
+    public void inject(GestorOpenWeather gestor){listaServicios.put("TicketMaster",gestor);}
+    public void inject(GestorNewsDataIO gestor){listaServicios.put("TicketMaster",gestor);}
     public static GestorServicios getGestorServicios(){
         if (gestorServicios==null){
             gestorServicios=new GestorServicios();

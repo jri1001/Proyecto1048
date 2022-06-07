@@ -64,7 +64,7 @@ http://www.thymeleaf.org ">
 <div class="container-activas">
 <div class="activa">
   <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <span style="color:orange" th:text="${ubic}" ></span></p></td>
+    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a></p></td>
   </tr>
 </div>
 

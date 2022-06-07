@@ -87,7 +87,7 @@ public class GestorMain {
             if(gestorUbicacion.getListaUbicacionesRecientes().contains(formatearToponimo(toponimo))){
                 gestorUbicacion.deleteUbicacionReciente(formatearToponimo(toponimo));
                 gestorSQLite.deleteUbicacionReciente(formatearToponimo(toponimo));
-            }else if(gestorUbicacion.getListaUbicacionesRecientes().size()==10){
+            }else if(gestorUbicacion.getListaUbicacionesRecientes().size()>=10){
                 gestorUbicacion.deleteUbicacionReciente(gestorSQLite.deleteUbicacionRecienteMasAntigua());
             }
             gestorUbicacion.addUbicacionReciente(formatearToponimo(toponimo));

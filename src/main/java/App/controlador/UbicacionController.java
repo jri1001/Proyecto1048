@@ -6,8 +6,9 @@ import modelo.Ubicacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.ws.rs.PathParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,10 +30,10 @@ public class UbicacionController {
 
         String coordenadas = latitud + ","+ longitud;
 
-        GestorGeocoding gestorGeocoding = new GestorGeocoding();
+        GestorGeocoding gestorGeocoding = GestorGeocoding.getGestorGeocoding();
         Ubicacion ubicacion = gestorGeocoding.peticion(coordenadas);
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
 
         if(ubicacion != null) {
             if(gestorSQLite.getUbicacion(new String[]{latitud,longitud}).getNombre() == null ) {
@@ -59,10 +60,10 @@ public class UbicacionController {
     @RequestMapping(value="/ubicacion/add-toponimo")
     public String addToponimo(@RequestParam(name="nombre",required = false,defaultValue ="") String nombr, @RequestParam(name="alias",required = false,defaultValue ="") String alia,Model model) {
 
-        GestorGeocoding gestorGeocoding = new GestorGeocoding();
+        GestorGeocoding gestorGeocoding = GestorGeocoding.getGestorGeocoding();
         Ubicacion ubicacion = gestorGeocoding.peticion(nombr);
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
 
         if(ubicacion != null ) {
 
@@ -88,7 +89,7 @@ public class UbicacionController {
 
     @RequestMapping(value="/ubicacion/add-grupo")
     public String addUbicacGrupo(@RequestParam(name="grupo",required = false,defaultValue ="") String grupo, @RequestParam(name="toponimo",required = false,defaultValue ="") String toponimo, Model model) {
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
 
         if(gestorSQLite.getGrupos().contains(grupo) && !toponimo.equals("")){
             String nombre = gestorSQLite.UbicacionGrupo(grupo,toponimo);
@@ -107,11 +108,10 @@ public class UbicacionController {
     @RequestMapping("/ubicacion/infoUbic")
     public String infoUbic(){return "ubicacion/infoUbic";}
 
-    @RequestMapping("/ubicacion/infoUbicacion")
-    public String infoUbica(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
-
+    @RequestMapping(value = "/ubicacion/infoUbicacion/{toponimo}")
+    public String infoUbica(@PathVariable("toponimo") String toponimo, Model model){
         Ubicacion ubic = new Ubicacion();
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
         ubic = gestorSQLite.getUbicacion(toponimo);
 
         if(ubic != null) {
@@ -133,7 +133,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/gruposUbicacion")
     public String listGrupos(Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         String grupo1 = gestorSQLite.getListaGruposUbicaciones().get(0);
@@ -155,7 +155,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/list-activas")
     public String listActivas(Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
 
@@ -164,7 +164,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/list-previas")
     public String listPrevias(Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicacionesPrevias", gestorSQLite.getListaUbicacionesRecientes());
 
@@ -173,7 +173,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/mis-ubicaciones")
     public String misUbicaciones(Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         model.addAttribute("ubicaciones", gestorSQLite.getUbicacionesFavoritas());
 
@@ -183,7 +183,7 @@ public class UbicacionController {
     @RequestMapping("/ubicacion/ubicFavorita")
     public String UbicacionesFavoritas(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
         LocalDate fecha = LocalDate.now();
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         String topo = gestorSQLite.formatearToponimo(toponimo);
@@ -209,7 +209,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/elimUbic")
     public String descUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()!=null && gestorSQLite.getUbicacion(toponimo).getNombre().equals(gestorSQLite.formatearToponimo(toponimo))) {
@@ -227,7 +227,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/deleteUbicFav")
     public String deleteUbicacionFavorita(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
         String topo = gestorSQLite.formatearToponimo(toponimo);
 
@@ -247,7 +247,7 @@ public class UbicacionController {
 
     @RequestMapping("/ubicacion/deleteGrupo")
     public String deleteUbicacionesGrupo(@RequestParam(name="nombre",required = false,defaultValue ="") String grupo,Model model){
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         if(!grupo.equals("") && gestorSQLite.getGrupos().contains(grupo)){
@@ -268,7 +268,7 @@ public class UbicacionController {
     public String desUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String ubicacion,Model model){
 
         LocalDate fecha = LocalDate.now();
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         String topo = gestorSQLite.formatearToponimo(ubicacion);
@@ -291,7 +291,7 @@ public class UbicacionController {
     @RequestMapping("/activarUbic")
     public String actvUbic(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo, Model model){
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
         if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()!=null && gestorSQLite.getUbicacion(toponimo).getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){

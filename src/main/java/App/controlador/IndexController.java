@@ -15,8 +15,8 @@ public class IndexController {
     @RequestMapping(value="/principal")
     public String getPrincipal(Model model) {
 
-        GestorSQLite gestorSQLite = new GestorSQLite();
-        GestorOpenWeather gestorOpenWeather = new GestorOpenWeather();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
+        GestorOpenWeather gestorOpenWeather = GestorOpenWeather.getGestorOpenWeather();
         //gestorSQLite.crearDB("proyecto.db");
         gestorSQLite.connect();
 

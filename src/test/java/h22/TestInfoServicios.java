@@ -30,7 +30,7 @@ public class TestInfoServicios {
         HashMap<String, String> lista=gestorMain.getinfoServicios();
 
         //Then
-        assertEquals(lista.size(),3);
+        assertEquals(lista.size(),4);
         assertNotNull(lista.get("TicketMaster"));
     }
 
@@ -42,7 +42,7 @@ public class TestInfoServicios {
         HashMap<String, String> lista=gestorMain.getinfoServicios();
 
         //Then
-        assertEquals(lista.size(),3);
+        assertEquals(lista.size(),4);
         assertNull(lista.get("Deportes"));
     }
 }

@@ -155,8 +155,20 @@ public class UbicacionController {
         return "ubicacion/gruposUbicacion";
     }
 
+    @RequestMapping(value = "/ubicacion/list-activas")
+    public String listActivas(Model model){
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
+        gestorSQLite.connect();
+
+        model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
+
+        //System.out.printf("El valor del nombre es " + toponimo);
+
+        return "ubicacion/list-activas";
+    }
+
     @RequestMapping(value = "/ubicacion/list-activas/{toponimo}")
-    public String listActivas(@PathVariable("toponimo") String toponimo,Model model){
+    public String desactivarUbic(@PathVariable("toponimo") String toponimo,Model model){
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
@@ -165,7 +177,7 @@ public class UbicacionController {
 
         //System.out.printf("El valor del nombre es " + toponimo);
 
-        return "ubicacion/list-activas";
+        return "redirect:/ubicacion/list-activas";
     }
 
     @RequestMapping("/ubicacion/list-NoActivas")
@@ -175,6 +187,18 @@ public class UbicacionController {
         model.addAttribute("ubicacionesNoactivas", gestorSQLite.getListaUbicacionesNoActivas());
 
         return "ubicacion/list-NoActivas";
+    }
+    @RequestMapping("/ubicacion/list-NoActivas/{toponimo}")
+    public String activarUbic(@PathVariable("toponimo") String toponimo,Model model){
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
+        gestorSQLite.connect();
+
+        gestorSQLite.activarUbicacion(toponimo);
+        model.addAttribute("ubicacionesNoactivas", gestorSQLite.getListaUbicacionesNoActivas());
+
+        //System.out.printf("El valor del nombre es " + toponimo);
+
+        return "redirect:/ubicacion/list-NoActivas";
     }
 
     @RequestMapping("/ubicacion/list-previas")

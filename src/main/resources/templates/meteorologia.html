@@ -53,6 +53,7 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="/servicios/info">Noticias</a></li>
       <li><a href="/servicios/eventos">Eventos</a></li>
+      <li><a href="../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
@@ -63,7 +64,10 @@ http://www.thymeleaf.org ">
 <div class="container-noticias">
   <div class="noticia">
     <tr th:each="ubic: ${ubicacionesActivas}">
-      <td><p><span th:text="${ubic}" ></span><span ></span><a href="/meteorologiatopon" class="btn-info-noticia">Ver meteorología</a></p></td>
+      <td><p><span th:text="${ubic}" >
+      </span><span ></span><a href="/meteorologiatopon" class="btn-desactivar">Ver meteorología</a>
+      </p>
+      </td>
     </tr>
   </div>
 </div>

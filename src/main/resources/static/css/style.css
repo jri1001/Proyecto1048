@@ -319,8 +319,29 @@ li.dropdown {
   margin-left: 6%;
 }
 
-.btn-info-noticia:hover, .btn-add-ubic:hover, .btn-atras:hover, .btn-act-serv:hover, .btn-elim-ubic:hover, .btn-add-grupo:hover {
+.btn-add-fav:hover, .btn-info-noticia:hover, .btn-add-ubic:hover, .btn-atras:hover, .btn-act-serv:hover, .btn-elim-ubic:hover, .btn-add-grupo:hover {
   background-color: #db5746;
+}
+
+.btn-desactivar:hover {
+    background-color: #db5746;
+}
+
+.btn-desactivar {
+  cursor: pointer;
+  background-color: #ee6957;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  display: inline-flex;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
+  position: absolute;
+  right: 0;
+  margin-right: 30%;
 }
 
 .add-ubic-container {
@@ -406,7 +427,24 @@ margin-left: 70%;
 margin-top: -30px;
 }
 
+.btn-mis-ubic3 {
+position: absolute;
+margin-left: 15%;
+margin-top: -30px;
+}
+
 .btn-add-grupo {
+  background-color: #5787ee;
+  text-decoration: none;
+  padding: 0.6rem 3rem;
+  font-size: 1rem;
+  color: rgb(240, 233, 233);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 9px;
+  border: none;
+}
+
+.btn-add-fav {
   background-color: #5787ee;
   text-decoration: none;
   padding: 0.6rem 3rem;
@@ -522,3 +560,15 @@ input:focus {
     z-index: 0;
 }
 
+.box-style-main {
+    text-decoration: none;
+    color: black;
+}
+
+.box-style-main:hover, .box-style-ubic:hover{
+    color: #ee6452;
+}
+
+.box-style-ubic {
+    color: white;
+}

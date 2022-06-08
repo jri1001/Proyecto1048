@@ -54,17 +54,23 @@ http://www.thymeleaf.org ">
 </nav>
 <button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
 
-<div class="btn-mis-ubic">
-  <a href="../ubicacion/ubicFavorita" class="btn-add-grupo">Añadir ubicación a favoritos</a>
+<div class="btn-mis-ubic3">
+  <a href="../ubicacion/ubicFavorita" class="btn-add-fav">Añadir ubicación a favoritos</a>
 </div>
 
 <div class="titulo-activas">
   <h1 style="text-align: center;">Ubicaciones activas</h1>
 </div>
+
 <div class="container-activas">
 <div class="activa">
   <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-activas/'+${ubic}}" class="btn-add-grupo">Desactivar</a></p></td>
+    <td>
+      <p>Ubicacion:
+        <a class="box-style-ubic" th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" th:text="${ubic}" >
+        </a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-activas/'+${ubic}}" class="btn-desactivar">Desactivar</a>
+      </p>
+    </td>
   </tr>
 </div>
 

@@ -57,10 +57,15 @@ http://www.thymeleaf.org ">
 <div class="titulo-activas">
   <h1 style="text-align: center;">Ubicaciones No activas</h1>
 </div>
+
 <div class="container-activas">
 <div class="activa">
   <tr th:each="ubic: ${ubicacionesNoactivas}">
-    <td><p>Ubicacion: <a style="color:orange" th:text="${ubic}" ></a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-NoActivas/'+${ubic}}" class="btn-atras">Activar</a></p></td>
+    <td>
+      <p>Ubicacion:
+        <a style="color:orange" th:text="${ubic}"></a>
+        <a th:href="@{'/ubicacion/list-NoActivas/'+${ubic}}" class="btn-desactivar">Activar</a></p>
+    </td>
   </tr>
 </div>
 

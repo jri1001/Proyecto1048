@@ -155,11 +155,15 @@ public class UbicacionController {
         return "ubicacion/gruposUbicacion";
     }
 
-    @RequestMapping("/ubicacion/list-activas")
-    public String listActivas(Model model){
+    @RequestMapping(value = "/ubicacion/list-activas/{toponimo}")
+    public String listActivas(@PathVariable("toponimo") String toponimo,Model model){
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
+
+        gestorSQLite.desactivarUbicacion(toponimo);
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
+
+        //System.out.printf("El valor del nombre es " + toponimo);
 
         return "ubicacion/list-activas";
     }

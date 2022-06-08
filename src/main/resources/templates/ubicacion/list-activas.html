@@ -32,7 +32,7 @@ http://www.thymeleaf.org ">
       <li class="dropdown">
         <a href="#" class="dropbtn">Ubicaciones</a>
         <div class="dropdown-content">
-          <a style="font-size: 15px;" href="../ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="../../../ubicacion/list-activas">Ubicaciones activas</a>
           <a style="font-size: 15px;" href="../../ubicacion/list-NoActivas">Ubicaciones No activas</a>
           <a style="font-size: 15px;" href="../ubicacion/list-previas">Historial de Ubicaciones</a>
           <a style="font-size: 15px;" href="../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
@@ -64,7 +64,7 @@ http://www.thymeleaf.org ">
 <div class="container-activas">
 <div class="activa">
   <tr th:each="ubic: ${ubicacionesActivas}">
-    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a>&nbsp&nbsp<a href="/ubicacion/list-activas" class="btn-atras">Desactivar</a></p></td>
+    <td><p>Ubicacion: <a th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" style="color:orange" th:text="${ubic}" ></a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-activas/'+${ubic}}" class="btn-add-grupo">Desactivar</a></p></td>
   </tr>
 </div>
 

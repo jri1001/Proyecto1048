@@ -3,6 +3,7 @@ package App.controlador;
 import modelo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,8 +16,8 @@ import java.util.Set;
 public class ServicioController {
 
 
-    @RequestMapping("/servicios/list_met")
-    public String listMet(@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,@RequestParam(name="modo",required = false,defaultValue ="") String modo,Model model) throws InterruptedException {
+    @RequestMapping(value = "/servicios/list_met/{toponimo}")
+    public String listMet(@PathVariable("toponimo") String toponimo, @RequestParam(name="modo",required = false,defaultValue ="") String modo, Model model){
 
         GestorOpenWeather gestorOpenWeather = GestorOpenWeather.getGestorOpenWeather();
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;

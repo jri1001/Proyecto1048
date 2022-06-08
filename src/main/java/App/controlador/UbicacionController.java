@@ -162,8 +162,6 @@ public class UbicacionController {
 
         model.addAttribute("ubicacionesActivas", gestorSQLite.getListaUbicacionesActivas());
 
-        //System.out.printf("El valor del nombre es " + toponimo);
-
         return "ubicacion/list-activas";
     }
 
@@ -195,8 +193,6 @@ public class UbicacionController {
 
         gestorSQLite.activarUbicacion(toponimo);
         model.addAttribute("ubicacionesNoactivas", gestorSQLite.getListaUbicacionesNoActivas());
-
-        //System.out.printf("El valor del nombre es " + toponimo);
 
         return "redirect:/ubicacion/list-NoActivas";
     }

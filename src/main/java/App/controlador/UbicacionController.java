@@ -110,6 +110,7 @@ public class UbicacionController {
 
     @RequestMapping(value = "/ubicacion/infoUbicacion/{toponimo}")
     public String infoUbica(@PathVariable("toponimo") String toponimo, Model model){
+        LocalDate fecha = LocalDate.now();
         Ubicacion ubic = new Ubicacion();
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
         ubic = gestorSQLite.getUbicacion(toponimo);
@@ -122,6 +123,7 @@ public class UbicacionController {
             model.addAttribute("longitud", ubic.getLongitud());
             model.addAttribute("latitud", ubic.getLatitud());
             model.addAttribute("alias", gestorSQLite.getAlias(toponimo));
+            gestorSQLite.addUbicacionPrevia(toponimo, fecha.toString());
 
             if ( ubic.getNombre()== null || !ubic.getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){
                 String mensajes = "Topónimo incorrecto.Vuelva intentarlo de nuevo.";

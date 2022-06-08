@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -40,6 +41,9 @@ public class ServicioController {
             model.addAttribute("velaire", velocidadAire);
             model.addAttribute("clim", clima);
             model.addAttribute("descripcion", climadescrp);
+
+            LocalDate fecha = LocalDate.now();   //Historial de ubicaciones
+            gestorSQLite.addUbicacionPrevia(toponimo, fecha.toString());
 
             if(modo.equals("Si") || modo.equals("si") ){
                 gestorTTS.speak("ciudad");

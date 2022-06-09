@@ -16,7 +16,7 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementsByClassName("btn-info-noticia");
+    var btn = document.getElementsByClassName("btn");
     var i;
     for (i = 0; i < btn.length; i++) {
     btn[i].classList.toggle("dark-mode-btn");
@@ -57,7 +57,7 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-noticias">
   <h1>Eventos en <span th:text="${top}"></span></h1>
     <h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h2>

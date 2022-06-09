@@ -16,7 +16,7 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementsByClassName("btn-info-noticia");
+    var btn = document.getElementsByClassName("btn");
     var i;
     for (i = 0; i < btn.length; i++) {
     btn[i].classList.toggle("dark-mode-btn");
@@ -57,7 +57,7 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn-atras btn" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-noticias">
   <h1>Meteorología</h1>
 </div>
@@ -65,7 +65,7 @@ http://www.thymeleaf.org ">
   <div class="noticia">
     <tr th:each="ubic: ${ubicacionesActivas}">
       <td><p><span th:text="${ubic}" >
-      </span><span ></span><a th:href="@{'/servicios/list_met/'+${ubic}}" class="btn-desactivar">Ver meteorología</a>
+      </span><span ></span><a th:href="@{'/servicios/list_met/'+${ubic}}" class="btn btn-desactivar">Ver meteorología</a>
       </p>
       </td>
     </tr>

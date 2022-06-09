@@ -15,8 +15,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -49,10 +52,11 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="../../../servicios/info">Noticias</a></li>
       <li><a href="../../../servicios/eventos">Eventos</a></li>
+      <li><a href="../../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-met">
   <h1>Información <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>

@@ -16,6 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -52,12 +57,12 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
-<a href="../../servicios/ActivarServicio" class="btn-act-serv">Activar servicio</a>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<a href="../../servicios/ActivarServicio" class="btn btn-act-serv">Activar servicio</a>
 </br>
 <form action="/servicios/InfoServicios" method="post" class="add-form">
   <input type="hidden" id="speech" name="speech" value="Si"><br>
-  <input id="btn-add-ubic" class="btn-add-grupo" type="submit" value="Text-speech">
+  <input id="btn-add-ubic" class="btn btn-add-grupo" type="submit" value="Text-speech">
 </form>
 
 <div class="titulo-noticias">

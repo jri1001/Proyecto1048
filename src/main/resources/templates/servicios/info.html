@@ -18,7 +18,7 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementsByClassName("btn-info-noticia");
+    var btn = document.getElementsByClassName("btn");
     var i;
     for (i = 0; i < btn.length; i++) {
     btn[i].classList.toggle("dark-mode-btn");
@@ -59,7 +59,7 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-noticias">
   <h1 style="margin: auto; text-align: center;"><i class="fas fa-newspaper"></i> Noticias <i class="fas fa-newspaper"></i></h1>
 </div>
@@ -69,7 +69,7 @@ http://www.thymeleaf.org ">
     <div class="noticia-item">
         <form action="/servicios/info" method="post" class="add-form">
             <input type="hidden" id="speech" name="speech" value="uno"><br>
-            <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Text-speech">
+            <input id="btn-add-ubic" class="btn btn-add-ubic" type="submit" value="Text-speech">
         </form>
         <h2>Título</h2>
         <p th:text="${tit}"></p>
@@ -84,7 +84,7 @@ http://www.thymeleaf.org ">
     <div class="noticia-item">
         <form action="/servicios/info" method="post" class="add-form">
             <input type="hidden" id="speech1" name="speech1" value="uno"><br>
-            <input id="btn-add-ubicc" class="btn-add-ubic" type="submit" value="Text-speech">
+            <input id="btn-add-ubicc" class="btn btn-add-ubic" type="submit" value="Text-speech">
         </form>
         <h2>Título</h2>
         <p th:text="${titu}"></p>
@@ -99,7 +99,7 @@ http://www.thymeleaf.org ">
     <div class="noticia-item">
         <form action="/servicios/info" method="post" class="add-form">
             <input type="hidden" id="speech2" name="speech2" value="uno"><br>
-            <input id="btn-add-ubic2" class="btn-add-ubic" type="submit" value="Text-speech">
+            <input id="btn-add-ubic2" class="btn btn-add-ubic" type="submit" value="Text-speech">
         </form>
         <h2>Título</h2>
         <p th:text="${titul}"></p>

@@ -18,9 +18,12 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
-  }
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+      btn[i].classList.toggle("dark-mode-btn");
+    }
+   }
   </script>
   <title>Nomeca</title>
 </head>
@@ -61,7 +64,7 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver al inicio</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver al inicio</button>
 
 <div class="general">
 <div class="big">
@@ -95,7 +98,7 @@ http://www.thymeleaf.org ">
 </div>
   <div class="btn-ubics" >
     </br></br></br>
-    <a href="/ubicacion/elimUbic" class="btn-info-noticia">Eliminar Ubicación</a>
+    <a href="/ubicacion/elimUbic" class="btn btn-info-noticia">Eliminar Ubicación</a>
   </div>
 </div>
 <script>

@@ -16,8 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -54,13 +57,13 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="add-ubic-container">
     <h1>Desactivar Servicio</h1>
     <form action="/servicios/desactivarServicio" method="post" class="add-form">
       <label for="nombre" class="add-label">Nombre del Servicio</label><br>
       <input class="add-input" type="text" id="nombre" name="nombre" placeholder="Servicio"><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Desactivar">
+      <input id="btn-add-ubic" class="btn btn-add-ubic" type="submit" value="Desactivar">
       <h3 style="color:orange"><span th:text="${mensaje}"></span></h3>
     </form>
   </div>

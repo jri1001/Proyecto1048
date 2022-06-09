@@ -16,6 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -52,11 +57,11 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
 
 <div class="btn-mis-ubic">
-<a href="../ubicacion/deleteUbicFav" class="btn-elim-ubic">Eliminar ubicación favorita</a>
-<a href="../ubicacion/add-grupo" class="btn-add-grupo">Añadir ubicación a un grupo</a>
+<a href="../ubicacion/deleteUbicFav" class="btn btn-elim-ubic">Eliminar ubicación favorita</a>
+<a href="../ubicacion/add-grupo" class="btn btn-add-grupo">Añadir ubicación a un grupo</a>
 </div>
 
 <div class="titulo-previas">

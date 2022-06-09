@@ -16,6 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -52,10 +57,10 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
 
 <div class="btn-mis-ubic3">
-  <a href="../ubicacion/ubicFavorita" class="btn-add-fav">Añadir ubicación a favoritos</a>
+  <a href="../ubicacion/ubicFavorita" class="btn btn-add-fav">Añadir ubicación a favoritos</a>
 </div>
 
 <div class="titulo-activas">
@@ -68,7 +73,7 @@ http://www.thymeleaf.org ">
     <td>
       <p>Ubicacion:
         <a class="box-style-ubic" th:href="@{'/ubicacion/infoUbicacion/'+${ubic}}" th:text="${ubic}" >
-        </a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-activas/'+${ubic}}" class="btn-desactivar">Desactivar</a>
+        </a>&nbsp&nbsp<a th:href="@{'/ubicacion/list-activas/'+${ubic}}" class="btn btn-desactivar">Desactivar</a>
       </p>
     </td>
   </tr>

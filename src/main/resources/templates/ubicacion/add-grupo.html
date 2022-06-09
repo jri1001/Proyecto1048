@@ -16,8 +16,11 @@ http://www.thymeleaf.org ">
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -54,7 +57,7 @@ http://www.thymeleaf.org ">
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="add-ubic-container">
     <br/>
     <h2>Añadir ubicación a un grupo</h2>
@@ -63,7 +66,7 @@ http://www.thymeleaf.org ">
       <input class="add-input" type="text" id="grupo" name="grupo" placeholder="Nombre del Grupo"><br>
       <label for="toponimo" class="add-label" >Introduce el topónimo</label><br>
       <input class="add-input" type="text" id="toponimo" name="toponimo" placeholder="Tóponimo"><br><br>
-      <input id="btn-add-ubic" class="btn-add-ubic" type="submit" value="Añadir">
+      <input id="btn-add-ubic" class="btn btn-add-ubic" type="submit" value="Añadir">
       <h3>&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3><br/>
     </form>
   </div>

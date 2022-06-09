@@ -8,15 +8,18 @@ http://www.thymeleaf.org ">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" href="../static/css/style.css"
-        th:href="@{../css/style.css}" rel="stylesheet" media="screen"/>
+        th:href="@{../../css/style.css}" rel="stylesheet" media="screen"/>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script>
     function myFunction() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-    var btn = document.getElementById("btn-add-ubic");
-    btn.classList.toggle("dark-mode-btn");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
   }
   </script>
   <title>Nomeca</title>
@@ -49,10 +52,11 @@ http://www.thymeleaf.org ">
       </li>
       <li><a href="../../servicios/info">Noticias</a></li>
       <li><a href="../../servicios/eventos">Eventos</a></li>
+      <li><a href="../../meteorologia">Meteorologia</a></li>
     </ul>
   </div>
 </nav>
-<button class="btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
   <div class="titulo-met">
   <h1>Metereología <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>

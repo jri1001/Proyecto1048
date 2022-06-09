@@ -176,6 +176,7 @@ public class ServicioController {
                 gestorTTS.speak("descripcion");gestorTTS.speak(notic.get("Description"));
                 gestorTTS.speak("fecha");gestorTTS.speak(notic.get("Date"));
             }
+            modo = "";
 
             if( 1 < noticias.size()) {
                 HashMap<String, String> noti = noticias.get(1);

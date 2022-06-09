@@ -437,4 +437,39 @@ public class ServicioController {
         }
         return "servicios/desactivarServicio";
     }
+
+    @RequestMapping("/servicios/activar-servicio-ubic/{toponimo}")
+    public String activarServUbic(@PathVariable("toponimo") String toponimo,
+                                  @RequestParam(name="ubic",required = false,defaultValue ="") String ubic,
+                                  @RequestParam(name="servicio",required = false,defaultValue ="") String servicio,
+                                  Model model) {
+
+        GestorSQLite gestorSQLite =  GestorSQLite.getGestorSQLite();
+        gestorSQLite.connect();
+
+        model.addAttribute("toponimo", toponimo);
+        boolean activado = gestorSQLite.addServicioUbicacion(servicio, ubic);
+
+        if(activado){
+            String mens = "El servicio se ha activado correctamente";
+            model.addAttribute("mensaje",mens);
+        }else{
+          //  if(gestorSQLite.getListaServiciosUbicacion() != null) {
+           /*     if (gestorSQLite.getListaServiciosUbicacion().get(ubic).contains(servicio)) {
+                    String mens = "Este servicio ya está activo.";
+                    model.addAttribute("mensaje", mens);
+                } */
+                if (!servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)) {
+                    String mens = "Este servicio no está disponible en el sistema";
+                    model.addAttribute("mensaje", mens);
+                } else {
+                    String mens = " ";
+                    model.addAttribute("mensaje", mens);
+                }
+           // }
+        }
+
+        return "servicios/activar-servicio-ubic";
+    }
+
 }

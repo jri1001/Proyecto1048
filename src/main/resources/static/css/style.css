@@ -405,6 +405,7 @@ li.dropdown {
 }
 
 .btn-elim-ubic {
+  cursor: pointer;
   background-color: #ee6957;
   text-decoration: none;
   padding: 0.6rem 3rem;

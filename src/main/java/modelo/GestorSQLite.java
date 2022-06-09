@@ -401,7 +401,24 @@ public class GestorSQLite implements IntGestorSQLite{
         ubicaciones.removeAll(getListaUbicacionesActivas());
         return ubicaciones;
     }
+    public List<String> getListaUbicacionesNombre(){
+        String sql ="SELECT * FROM Ubicacion;";
+        ArrayList<String>listaUbicaciones=new ArrayList<>();
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
 
+            // loop through the result set
+            while (rs.next()){
+                Ubicacion ubicacion=new Ubicacion();
+                listaUbicaciones.add(rs.getString("nombre"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return listaUbicaciones;
+    }
     public ArrayList<String> getListaGruposUbicaciones(){
         String sql ="SELECT * FROM GruposUbicaciones;";
         ArrayList<String> listaUbicaciones=new ArrayList<>();

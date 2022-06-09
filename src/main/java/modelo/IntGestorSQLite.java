@@ -30,6 +30,7 @@ public interface IntGestorSQLite {
     String deleteUbicacionRecienteMasAntigua();
     boolean clearUbicaciones();
     List<Ubicacion>getListaUbicaciones();
+    List<String> getListaUbicacionesNombre();
     HashSet<String> getListaUbicacionesActivas();
     HashSet<String> getListaUbicacionesRecientes();
     HashMap<String, ArrayList<String>> getListaAlias();

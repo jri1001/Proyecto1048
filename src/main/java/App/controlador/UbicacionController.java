@@ -92,10 +92,16 @@ public class UbicacionController {
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
 
         if(gestorSQLite.getGrupos().contains(grupo) && !toponimo.equals("")){
-            String nombre = gestorSQLite.UbicacionGrupo(grupo,toponimo);
-            gestorSQLite.addUbicacionGrupo(nombre,grupo);
-            String mens = "Ubicación añadida al grupo" + " " + grupo;
-            model.addAttribute("mensaje",mens);
+
+            if(gestorSQLite.getListaUbicacionesNombre().contains(gestorSQLite.formatearToponimo(toponimo))) {
+                String nombre = gestorSQLite.UbicacionGrupo(grupo, toponimo);
+                gestorSQLite.addUbicacionGrupo(nombre, grupo);
+                String mens = "Ubicación añadida al grupo" + " " + grupo;
+                model.addAttribute("mensaje", mens);
+            }else{
+                String mens = "Esta ubicación no existe en el sistema";
+                model.addAttribute("mensaje", mens);
+            }
         }else{
             if(!toponimo.equals("") && !grupo.equals("")){
                 String mens = "Grupo incorrecto";

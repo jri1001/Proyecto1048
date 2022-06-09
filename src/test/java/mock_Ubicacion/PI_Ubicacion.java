@@ -149,4 +149,45 @@ public class PI_Ubicacion {
         assertEquals(res2,res3,res4);
         assertFalse(gestorUbicacion.getListaUbicacionesRecientes().contains("ubicacion1"));
     }
+    @Test
+    public void TestAddAlias(){
+        //Given
+        String nombreUbic="Ubicacion";
+        String nombreAlias="Alias1";
+        Ubicacion ubicacion=new Ubicacion();
+        ubicacion.setNombre(nombreUbic);
+        gestorUbicacion.addUbicacion(ubicacion);
+
+        //When
+        //La primera vez se añade un alias no existente (true), la segunda se queja (false)
+        Mockito.when(mockedGestorSQLite.addAlias(Mockito.anyString(),Mockito.anyString())).thenReturn(true).thenReturn(false);
+        boolean res1=gestorMain.addAlias(nombreUbic, nombreAlias);
+        boolean res2=gestorMain.addAlias(nombreUbic, nombreAlias);
+        //Then
+        assertTrue(res1);
+        assertFalse(res2);
+        assertEquals(gestorMain.getListaAlias(nombreUbic).get(0),nombreAlias);
+    }
+
+    @Test
+    public void TestDeleteAlias(){
+        //Given
+        String nombreUbic="Ubicacion";
+        String nombreAlias="Alias1";
+        Ubicacion ubicacion=new Ubicacion();
+        ubicacion.setNombre(nombreUbic);
+        gestorUbicacion.addUbicacion(ubicacion);
+        gestorUbicacion.addAlias(gestorMain.formatearToponimo(nombreUbic),nombreAlias);
+
+        //When
+        //La primera vez se elimina un alias existente (true), la segunda se queja (false)
+        Mockito.when(mockedGestorSQLite.deleteAlias(Mockito.anyString(),Mockito.anyString())).thenReturn(true).thenReturn(false);
+        boolean res1=gestorMain.deleteAlias(nombreUbic, nombreAlias);
+        boolean res2=gestorMain.deleteAlias(nombreUbic, nombreAlias);
+        //Then
+        assertTrue(res1);
+        assertFalse(res2);
+        assertTrue(gestorMain.getListaAlias(nombreUbic).isEmpty());
+    }
+
 }

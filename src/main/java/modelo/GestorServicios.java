@@ -26,8 +26,8 @@ public class GestorServicios implements IntGestorServicios {
 
     }
     public void inject(GestorTicketMaster gestor){listaServicios.put("TicketMaster",gestor);}
-    public void inject(GestorOpenWeather gestor){listaServicios.put("TicketMaster",gestor);}
-    public void inject(GestorNewsDataIO gestor){listaServicios.put("TicketMaster",gestor);}
+    public void inject(GestorOpenWeather gestor){listaServicios.put("OpenWeather",gestor);}
+    public void inject(GestorNewsDataIO gestor){listaServicios.put("NewsDataIO",gestor);}
     public static GestorServicios getGestorServicios(){
         if (gestorServicios==null){
             gestorServicios=new GestorServicios();
@@ -45,9 +45,9 @@ public class GestorServicios implements IntGestorServicios {
     public List<String> getListaServiciosUbicacion(String nombre) {
         List<String> lista=listaServiciosUbicacion.get(nombre);
         if(lista==null){
-            lista=new ArrayList<>();
+            return new ArrayList<>();
         }
-        return lista;
+        return new ArrayList<>(lista);
     }
 
     public void syncDB(HashSet<String> listaServiciosActivos, HashMap<String, ArrayList<String>> listaServiciosUbicacion) {

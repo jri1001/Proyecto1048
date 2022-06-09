@@ -221,6 +221,7 @@ public class GestorMain {
         return false;
     }
 
+    //creo que este no se usa?
     public boolean deleteServicio(String servicio) {
         if(gestorServicios.deleteServicio(servicio)){
             return gestorSQLite.deleteServicioActivo(servicio);

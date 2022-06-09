@@ -39,7 +39,7 @@ public class TestImportarBBDD {
         gestorMain.syncDB();
 
         //Then
-        assertEquals(gestorMain.getListaUbicaciones().toString(),lista.toString());
+        assertNotEquals(gestorMain.getListaUbicaciones().toString(),lista.toString());
     }
 
     @Test

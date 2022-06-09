@@ -37,14 +37,14 @@ public class GestorUbicacion implements IntGestorUbicacion {
 
     //Metodos de la clase Gestor Ubicacion
     public Map<String, Ubicacion> getListaUbicacion(){
-        return listaUbicaciones;
+        return new HashMap<>(listaUbicaciones);
     }
 
     public List<String> getListaUbicacionesActivas(){
         return new ArrayList<>(listaUbicacionesActivas);
     }
 
-    public HashSet<String> getListaUbicacionesRecientes(){ return listaUbicacionesRecientes;}
+    public HashSet<String> getListaUbicacionesRecientes(){ return new HashSet<>(listaUbicacionesRecientes);}
 
     public void addUbicacion(Ubicacion ubicacion){
         listaUbicaciones.put(ubicacion.getNombre(), ubicacion);
@@ -111,7 +111,7 @@ public class GestorUbicacion implements IntGestorUbicacion {
     }
 
     public ArrayList<String> getListaAlias(String nombre) {
-        return listaAlias.get(nombre);
+        return new ArrayList<>(listaAlias.get(nombre));
     }
 
     public boolean deleteAlias(String nombre, String alias) {

@@ -115,11 +115,9 @@ public class GestorSQLite implements IntGestorSQLite{
         return false;
     }
 
+    //todo: no es correcto
     public boolean copyDB(String myUrl) {
-        String sql= "ATTACH DATABASE ? AS other;";
-        execute(sql,new String[]{myUrl});
-
-        sql= "DETACH ?;";
+        String sql= "BACKUP DATABASE proyecto.db TO DISK = ?;";
         return execute(sql,new String[]{myUrl});
     }
 

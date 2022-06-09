@@ -70,7 +70,7 @@ http://www.thymeleaf.org ">
 <div class="big">
   <div class="body-container-1">
     <div class="box-1">
-      <h2>Información general</h2>
+      <h1>Información general</h1>
       <div class="info-temp">
       <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-calendar-alt"></i> Fecha: <span id="currentDate"></span></h2>
       <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-clock"></i> Hora: <span id="currentTime"></span></h2>
@@ -94,12 +94,13 @@ http://www.thymeleaf.org ">
     <div class="box-5">
       <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicación</a></h3>
     </div>
+    <div class="box-5">
+      <h3><a id="elimubic" href="/ubicacion/elimUbic">
+        <i class="fas fa-trash"></i>
+        <br>Borrar ubicación</a></h3>
+    </div>
   </div>
 </div>
-  <div class="btn-ubics" >
-    </br></br></br>
-    <a href="/ubicacion/elimUbic" class="btn btn-info-noticia">Eliminar Ubicación</a>
-  </div>
 </div>
 <script>
    var today = new Date();

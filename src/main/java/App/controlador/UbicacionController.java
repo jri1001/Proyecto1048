@@ -116,6 +116,7 @@ public class UbicacionController {
         ubic = gestorSQLite.getUbicacion(toponimo);
 
         if(ubic != null) {
+            model.addAttribute("toponimo", toponimo);
 
             model.addAttribute("ciudad", ubic.getCiudad());
             model.addAttribute("provincia", ubic.getProvincia());

@@ -57,8 +57,11 @@ http://www.thymeleaf.org ">
   </div>
 </nav>
 <button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<div class="btn-mis-ubic3">
+  <a th:href="@{'../../servicios/activar-servicio-ubic/'+${toponimo}}" class="btn btn-elim-ubic">Activar servicio</a>
+</div>
   <div class="titulo-met">
-  <h1>Información <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
+  <h1>Información <i class="fas fa-map"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>
 <div class="container-met">
 <div class="met">
@@ -73,5 +76,8 @@ http://www.thymeleaf.org ">
 </div>
 </div>
 <h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h2>
+<div class="titulo-met">
+  <h1>Servicios disponibles <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
+</div>
 </body>
 </html>

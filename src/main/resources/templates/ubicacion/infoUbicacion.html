@@ -24,7 +24,7 @@ http://www.thymeleaf.org ">
   </script>
   <title>Nomeca</title>
 </head>
-<body>
+<body style="margin-bottom: 10%;">
 <nav id="navbar">
   <div class="container">
     <ul>
@@ -79,14 +79,13 @@ http://www.thymeleaf.org ">
 <div class="titulo-met">
   <h1>Servicios disponibles <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>
-<div class="activa">
+<div style="width: 50%; margin: auto;" class="activa">
   <tr th:each="servicio: ${listaServicios}">
     <p>Servicio:
-      <a th:text="${servicio.key}" th:href="${servicio.value}" class="btn btn-desactivar"></a></br><br><br>
-      <a th:text="Desactivar" th:href="@{'/ubicacion/infoUbicacion/'+${toponimo}+'/'+${servicio.key}}" class="btn btn-desactivar"></a>
+      <a th:text="${servicio.key}" th:href="${servicio.value}" class="btn btn-desactivar3"></a>
+      <a th:href="@{'/ubicacion/infoUbicacion/'+${toponimo}+'/'+${servicio.key}}" class="btn btn-desactivar2">Desactivar</a>
     </p>
-    <td>
-    </td>
+
   </tr>
 </div>
 </body>

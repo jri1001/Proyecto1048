@@ -46,12 +46,12 @@ public class UbicacionController {
                 String mens = "La ubicación se añadido al sistema";
                 model.addAttribute("mensaje", mens);
             }else{
-                String mens = "La ubicación ya está dada de alta en el sistema";
+                String mens = "Error: La ubicación ya está dada de alta en el sistema";
                 model.addAttribute("mensaje", mens);
             }
         }else{
             if(!latitud.equals("") || !longitud.equals("")){
-                String mens = "La latitud o longitud es inválida.";
+                String mens = "Error: La latitud o longitud es inválida.";
                 model.addAttribute("mensaje",mens);
             }
         }
@@ -76,12 +76,12 @@ public class UbicacionController {
                 String mens = "La ubicación se añadido al sistema";
                 model.addAttribute("mensaje", mens);
             }else{
-                String mens = "La ubicación ya está dada de alta en el sistema";
+                String mens = "Error: La ubicación ya está dada de alta en el sistema";
                 model.addAttribute("mensaje", mens);
             }
         }else{
             if(!nombr.equals("")){
-                String mens = "Nombre de ubicación inválido.";
+                String mens = "Error: Nombre de ubicación inválido.";
                 model.addAttribute("mensaje",mens);
             }
         }
@@ -100,12 +100,12 @@ public class UbicacionController {
                 String mens = "Ubicación añadida al grupo" + " " + grupo;
                 model.addAttribute("mensaje", mens);
             }else{
-                String mens = "Esta ubicación no existe en el sistema";
+                String mens = "Error: Esta ubicación no existe en el sistema";
                 model.addAttribute("mensaje", mens);
             }
         }else{
             if(!toponimo.equals("") && !grupo.equals("")){
-                String mens = "Grupo incorrecto";
+                String mens = "Error: Grupo incorrecto";
                 model.addAttribute("mensaje", mens);
             }
         }
@@ -153,7 +153,7 @@ public class UbicacionController {
             gestorSQLite.addUbicacionPrevia(toponimo, fecha.toString());
 
             if ( ubic.getNombre()== null || !ubic.getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){
-                String mensajes = "Topónimo incorrecto.Vuelva intentarlo de nuevo.";
+                String mensajes = "Error: Topónimo incorrecto.Vuelva intentarlo de nuevo.";
                 model.addAttribute("mensaje", mensajes);
             }
         }
@@ -272,11 +272,11 @@ public class UbicacionController {
             model.addAttribute("mensaje",mens);
         }else{
             if(!toponimo.equals("") && gestorSQLite.getUbicacion(toponimo).getNombre()== null){
-                String mens = "No se ha podido añadir a favoritos. La ubicación no está activada";
+                String mens = "Error: No se ha podido añadir a favoritos. La ubicación no está activada";
                 model.addAttribute("mensaje", mens);
             }else{
                 if(!toponimo.equals("")) {
-                    String mens = "Topónimo incorrecto.";
+                    String mens = "Error: Topónimo incorrecto.";
                     model.addAttribute("mensaje", mens);
                 }
             }
@@ -296,7 +296,7 @@ public class UbicacionController {
             model.addAttribute("mensaje", mens);
         }else{
             if(!toponimo.equals("")){
-                String mens = "La ubicación no existe en el sistema.";
+                String mens = "Error: La ubicación no existe en el sistema.";
                 model.addAttribute("mensaje", mens);
             }
         }
@@ -315,7 +315,7 @@ public class UbicacionController {
             model.addAttribute("mensaje",mens);
         }else{
             if(!toponimo.equals("")){
-                String mens = "Topónimo incorrecto.";
+                String mens = "Error: Topónimo incorrecto.";
                 model.addAttribute("mensaje", mens);
             }
         }
@@ -334,7 +334,7 @@ public class UbicacionController {
             model.addAttribute("mensaje", mens);
         }else{
             if(!grupo.equals("")){
-                String mens = "El nombre del grupo es incorrecto.";
+                String mens = "Error: El nombre del grupo es incorrecto.";
                 model.addAttribute("mensaje", mens);
             }
         }
@@ -358,7 +358,7 @@ public class UbicacionController {
             model.addAttribute("mensaje", mens);
         }else{
             if(!ubicacion.equals("")){
-                String mens = "Esta ubicación no está activa en el sistema.";
+                String mens = "Error: Esta ubicación no está activa en el sistema.";
                 model.addAttribute("mensaje", mens);
             }
         }
@@ -379,13 +379,13 @@ public class UbicacionController {
                 String mens = "La ubicación se ha activado en el sistema.";
                 model.addAttribute("mensaje", mens);
             }else{
-                String mens = "Esta ubicación ya está activa en el sistema.";
+                String mens = "Error: Esta ubicación ya está activa en el sistema.";
                 model.addAttribute("mensaje", mens);
             }
 
         }else{
             if(!toponimo.equals("")){
-                String mens = "La ubicación no está añadida en el sistema.";
+                String mens = "Error: La ubicación no está añadida en el sistema.";
                 model.addAttribute("mensaje", mens);
             }
         }

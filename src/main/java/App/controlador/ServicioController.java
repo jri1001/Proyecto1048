@@ -68,10 +68,10 @@ public class ServicioController {
             model.addAttribute("descripcion", e);
 
             if(!gestorSQLite.getListaServiciosActivos().contains("OpenWeather")){
-                String serv = "Este servicio no está activado en el sistema.";
+                String serv = "Error: Este servicio no está activado en el sistema.";
                 model.addAttribute("mensaje",serv);
             }else{
-                String serv = "Ubicación no dada de alta en el sistema.";
+                String serv = "Error: Ubicación no dada de alta en el sistema.";
                 model.addAttribute("mensaje",serv);
             }
 
@@ -243,10 +243,10 @@ public class ServicioController {
             model.addAttribute("fec",e);
 
             if(!gestorSQLite.getListaServiciosActivos().contains("NewsDataIO")){
-                String serv = "Este servicio no está activado en el sistema.";
+                String serv = "Error: Este servicio no está activado en el sistema.";
                 model.addAttribute("mensaje",serv);
             }else{
-                String serv = "No hay noticias disponibles en estos momentos.";
+                String serv = "Error: No hay noticias disponibles en estos momentos.";
                 model.addAttribute("mensaje",serv);
             }
 
@@ -310,10 +310,10 @@ public class ServicioController {
             model.addAttribute("infor",mens);
 
             if(!gestorSQLite.getListaServiciosActivos().contains("TicketMaster")){
-                String serv = "Este servicio no está activado en el sistema";
+                String serv = "Error: Este servicio no está activado en el sistema";
                 model.addAttribute("mensaje",serv);
             }else{
-                String serv = "No hay eventos disponibles en este momento";
+                String serv = "Error: No hay eventos disponibles en este momento";
                 model.addAttribute("mensaje",serv);
             }
 
@@ -368,11 +368,11 @@ public class ServicioController {
 
         }else{
             if(!gestorSQLite.getListaServiciosActivos().contains("TicketMaster")) {
-                String mensajes = "Este servicio no está activado en el sistema.";
+                String mensajes = "Error: Este servicio no está activado en el sistema.";
                 model.addAttribute("mensaje", mensajes);
                 model.addAttribute("top", toponimo);
             }else{
-                String mensajes = "No hay eventos disponibles";
+                String mensajes = "Error: No hay eventos disponibles";
                 model.addAttribute("mensaje", mensajes);
                 model.addAttribute("top", toponimo);
             }
@@ -410,11 +410,11 @@ public class ServicioController {
             model.addAttribute("mensaje",mens);
         }else{
             if(gestorSQLite.getListaServiciosActivos().contains(servicio)){
-                String mens = "Este servicio ya está activo en el sistema";
+                String mens = "Error: Este servicio ya está activo en el sistema";
                 model.addAttribute("mensaje", mens);
             }
             if( !servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)){
-                String mens = "Este servicio no está disponible en el sistema";
+                String mens = "Error: Este servicio no está disponible en el sistema";
                 model.addAttribute("mensaje", mens);
             }else{
                 String mens = " ";
@@ -438,7 +438,7 @@ public class ServicioController {
         }else{
 
             if( !servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)){
-                String mens = "Este servicio no está disponible en el sistema";
+                String mens = "Error: Este servicio no está disponible en el sistema";
                 model.addAttribute("mensaje", mens);
             }else{
                 String mens = " ";
@@ -466,19 +466,19 @@ public class ServicioController {
             model.addAttribute("mensaje",mens);
         }else{
             if(gestorSQLite.getListaServiciosUbicacion().get(toponimo) != null && gestorSQLite.getListaServiciosUbicacion().get(toponimo).contains(servicio)) {
-                    String mens = "Este servicio ya está activo para esta ubicacion";
+                    String mens = "Error: Este servicio ya está activo para esta ubicacion";
                     model.addAttribute("mensaje", mens);
             }else{
 
 
 
                 if (!servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)) {
-                    String mens = "Este servicio no está disponible en el sistema";
+                    String mens = "Error: Este servicio no está disponible en el sistema";
                     model.addAttribute("mensaje", mens);
                 }
 
                 if(!servicio.equals("") && !gestorSQLite.getListaServiciosActivos().contains(servicio)){
-                    String mens = "Este servicio no está activo en el sistema";
+                    String mens = "Error: Este servicio no está activo en el sistema";
                     model.addAttribute("mensaje", mens);
                 } else {
                     String mens = " ";

@@ -64,13 +64,14 @@ public class GestorMain {
     public Ubicacion addUbicacion(String toponimo){
         Ubicacion ubicacion=gestorGeocoding.peticion(formatearToponimo(toponimo));
         if(ubicacion!=null){
+            if(gestorUbicacion.contieneUbicacion(toponimo) || gestorSQLite.getUbicacion(toponimo)!=null){return null;}
             if(ubicacion.getCod_postal().equals("{}")){ //para ubicaciones mas pequeñas que ciudades a veces no las obtiene bien si se usa el toponimo
                 ubicacion=gestorGeocoding.peticion(formatearCoordenada(ubicacion.getLatitud()).trim()+",%20"+formatearCoordenada(ubicacion.getLongitud()));
             }
             ubicacion.setLatitud(formatearCoordenada(ubicacion.getLatitud()));
             ubicacion.setLongitud(formatearCoordenada(ubicacion.getLongitud()));
             if(gestorSQLite.addUbicacion(ubicacion)){
-                gestorUbicacion.addUbicacion(ubicacion); //todo: y si la ubicacion esta repetida?
+                gestorUbicacion.addUbicacion(ubicacion);
                 return ubicacion;
             }
         }

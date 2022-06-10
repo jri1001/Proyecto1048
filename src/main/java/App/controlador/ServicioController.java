@@ -448,6 +448,7 @@ public class ServicioController {
         GestorSQLite gestorSQLite =  GestorSQLite.getGestorSQLite();
         gestorSQLite.connect();
 
+
         model.addAttribute("toponimo", toponimo);
         boolean activado = gestorSQLite.addServicioUbicacion(servicio, ubic);
 
@@ -455,19 +456,26 @@ public class ServicioController {
             String mens = "El servicio se ha activado correctamente";
             model.addAttribute("mensaje",mens);
         }else{
-          //  if(gestorSQLite.getListaServiciosUbicacion() != null) {
-           /*     if (gestorSQLite.getListaServiciosUbicacion().get(ubic).contains(servicio)) {
-                    String mens = "Este servicio ya está activo.";
+            if(gestorSQLite.getListaServiciosUbicacion().get(toponimo) != null && gestorSQLite.getListaServiciosUbicacion().get(toponimo).contains(servicio)) {
+                    String mens = "Este servicio ya está activo para esta ubicacion";
                     model.addAttribute("mensaje", mens);
-                } */
+            }else{
+
+
+
                 if (!servicio.equals("") && !gestorSQLite.getListaServiciosDisponibles().contains(servicio)) {
                     String mens = "Este servicio no está disponible en el sistema";
+                    model.addAttribute("mensaje", mens);
+                }
+
+                if(!servicio.equals("") && !gestorSQLite.getListaServiciosActivos().contains(servicio)){
+                    String mens = "Este servicio no está activo en el sistema";
                     model.addAttribute("mensaje", mens);
                 } else {
                     String mens = " ";
                     model.addAttribute("mensaje", mens);
                 }
-           // }
+           }
         }
 
         return "servicios/activar-servicio-ubic";

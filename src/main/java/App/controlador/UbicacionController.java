@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -115,15 +116,34 @@ public class UbicacionController {
     public String infoUbic(){return "ubicacion/infoUbic";}
 
     @RequestMapping(value = "/ubicacion/infoUbicacion/{toponimo}")
-    public String infoUbica(@PathVariable("toponimo") String toponimo, Model model){
+    public String infoUbica(@PathVariable("toponimo") String toponimo,Model model){
         LocalDate fecha = LocalDate.now();
         Ubicacion ubic = new Ubicacion();
         GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
         ubic = gestorSQLite.getUbicacion(toponimo);
 
         if(ubic != null) {
-            model.addAttribute("toponimo", toponimo);
 
+            HashMap<String,String> listaServicios = new HashMap<>();
+            if(gestorSQLite.getListaServiciosUbicacion().get(toponimo) != null) {
+                for (String servicio : gestorSQLite.getListaServiciosUbicacion().get(toponimo)) {
+                    if (servicio.equals("NewsDataIO")) {
+                        String ruta = "../../servicios/info";
+                        listaServicios.put(servicio, ruta);
+                    }
+                    if (servicio.equals("TicketMaster")) {
+                        String ruta = "../../servicios/eventos";
+                        listaServicios.put(servicio, ruta);
+                    }
+                    if (servicio.equals("OpenWeather")) {
+                        String ruta = "../../servicios/list_met/" + toponimo;
+                        listaServicios.put(servicio, ruta);
+                    }
+                }
+            }
+
+            model.addAttribute("toponimo", toponimo);
+            model.addAttribute("listaServicios",listaServicios);
             model.addAttribute("ciudad", ubic.getCiudad());
             model.addAttribute("provincia", ubic.getProvincia());
             model.addAttribute("codigo", ubic.getCod_postal());
@@ -137,6 +157,7 @@ public class UbicacionController {
                 model.addAttribute("mensaje", mensajes);
             }
         }
+
         return "ubicacion/infoUbicacion";
     }
 
@@ -161,6 +182,21 @@ public class UbicacionController {
 
         return "ubicacion/gruposUbicacion";
     }
+
+    @RequestMapping(value = "/ubicacion/infoUbicacion/{toponimo}/{servic}")
+    public String infoUbica(@PathVariable("toponimo") String toponimo,@PathVariable("servic") String servic,Model model){
+        LocalDate fecha = LocalDate.now();
+        Ubicacion ubic = new Ubicacion();
+        GestorSQLite gestorSQLite = GestorSQLite.getGestorSQLite();;
+        ubic = gestorSQLite.getUbicacion(toponimo);
+
+        if(gestorSQLite.getListaServiciosUbicacion().get(toponimo).contains(servic)){
+            gestorSQLite.deleteServicioUbicacion(servic,toponimo);
+        }
+
+        return "redirect:/ubicacion/infoUbicacion/{toponimo}";
+    }
+
 
     @RequestMapping(value = "/ubicacion/list-activas")
     public String listActivas(Model model){

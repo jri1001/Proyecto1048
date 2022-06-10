@@ -79,5 +79,15 @@ http://www.thymeleaf.org ">
 <div class="titulo-met">
   <h1>Servicios disponibles <i class="fas fa-cloud"  style='font-size:34px; margin-left: 3%'></i></h1>
 </div>
+<div class="activa">
+  <tr th:each="servicio: ${listaServicios}">
+    <p>Servicio:
+      <a th:text="${servicio.key}" th:href="${servicio.value}" class="btn btn-desactivar"></a></br><br><br>
+      <a th:text="Desactivar" th:href="@{'/ubicacion/infoUbicacion/'+${toponimo}+'/'+${servicio.key}}" class="btn btn-desactivar"></a>
+    </p>
+    <td>
+    </td>
+  </tr>
+</div>
 </body>
 </html>

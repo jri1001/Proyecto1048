@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../../static/css/style.css"
+        th:href="@{../../css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
+  }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li><a href="../../../principal">Inicio</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a style="font-size: 15px;" href="../../../ubicacion/list-activas">Ubicaciones activas</a>
+            <a style="font-size: 15px;" href="../../../ubicacion/list-NoActivas">Ubicaciones No activas</a>
+          <a style="font-size: 15px;" href="../../../ubicacion/list-previas">Historial de Ubicaciones</a>
+            <a style="font-size: 15px;" href="../../../ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+            <a style="font-size: 15px;" href="../../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
+        </div>
+      </li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Servicios</a>
+            <div class="dropdown-content">
+                <a style="font-size: 15px;" href="/servicios/InfoServicios">Servicios Disponibles</a>
+                <a style="font-size: 15px;" href="/servicios/servicios-activos">Servicios activos</a>
+            </div>
+        </li>
+      <li><a href="../../../servicios/info">Noticias</a></li>
+        <li><a href="../../../servicios/eventos">Eventos</a></li>
+      <li><a href="../../meteorologia">Meteorologia</a></li>
+    </ul>
+  </div>
+</nav>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+  <div class="titulo-noticias">
+  <h1 style="margin: auto; text-align: center;"><i class="fas fa-newspaper"></i> Noticias <i class="fas fa-newspaper"></i></h1>
+</div>
+<h3>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp<span style="color:orange" th:text="${mensaje}"></span></h3>
+<div class="container-not">
+    <th:block th:each="noticia : ${noticias}">
+        <div class="noticia-item">
+            <h2>Título</h2>
+            <p th:text="${noticia.Title}"></p>
+            <h2>Link</h2>
+            <p th:text="${noticia.Link}"></p>
+            <h2>Descripción</h2>
+            <p th:text="${noticia.Description}"></p>
+            <h2>Fecha</h2>
+            <p th:text="${noticia.Date}"></p>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

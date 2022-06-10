@@ -255,6 +255,14 @@ public class ServicioController {
         return "servicios/info";
     }
     //aa
+    @RequestMapping("/servicios/info/{toponimo}")
+    public String noticiaUbicacion(@PathVariable("toponimo") String toponimo,Model model){
+        GestorNewsDataIO gestorNewsDataIO=GestorNewsDataIO.getGestorNewsDataIO();
+        ArrayList<HashMap<String, String>> mapa=gestorNewsDataIO.peticion(toponimo);
+        model.addAttribute("noticias",mapa);
+        model.addAttribute("toponimo",toponimo);
+        return "/servicios/infoUbic";
+    }
 
     @RequestMapping("/servicios/eventos")
     public String eventos (Model model){

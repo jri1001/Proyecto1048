@@ -128,7 +128,7 @@ public class UbicacionController {
             if(gestorSQLite.getListaServiciosUbicacion().get(toponimo) != null) {
                 for (String servicio : gestorSQLite.getListaServiciosUbicacion().get(toponimo)) {
                     if (servicio.equals("NewsDataIO")) {
-                        String ruta = "../../servicios/info";
+                        String ruta = "../../servicios/info/"+toponimo;
                         listaServicios.put(servicio, ruta);
                     }
                     if (servicio.equals("TicketMaster")) {

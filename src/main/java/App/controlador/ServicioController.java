@@ -313,8 +313,8 @@ public class ServicioController {
         return "servicios/eventos";
     }
 
-    @RequestMapping("/servicios/list_event")
-    public String listEventos (@RequestParam(name="nombre",required = false,defaultValue ="") String toponimo,Model model){
+    @RequestMapping("/servicios/list_event/{toponimo}")
+    public String listEventos (@PathVariable("toponimo") String toponimo,Model model){
 
         GestorTicketMaster gestorTicketMaster = GestorTicketMaster.getGestorTicketmaster();
         ArrayList<HashMap<String, String>> eventos = gestorTicketMaster.peticion(toponimo);
@@ -328,20 +328,6 @@ public class ServicioController {
             HashMap<String, String> even2;
             even1 = eventos.get(0);
             even2 = eventos.get(1);
-
-         /*   for (HashMap e : eventos) {
-
-                if (e.get("Location").equals(toponimo) && even1.isEmpty()) {
-                    even1 = e;
-                }
-                if (e.get("Location").equals(toponimo) && even2.isEmpty()) {
-                    even2 = e;
-                    if (even2.get("Event name").equals(even1.get("Event name"))) {
-                        even2 = new HashMap<>();
-                    }
-                }
-            }
-         */
 
 
             model.addAttribute("name", even1.get("Event name"));

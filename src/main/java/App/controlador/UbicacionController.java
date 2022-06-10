@@ -149,7 +149,12 @@ public class UbicacionController {
             model.addAttribute("codigo", ubic.getCod_postal());
             model.addAttribute("longitud", ubic.getLongitud());
             model.addAttribute("latitud", ubic.getLatitud());
-            model.addAttribute("alias", gestorSQLite.getAlias(toponimo));
+            if (! gestorSQLite.getAlias(toponimo).equals("")) {
+                model.addAttribute("alias", gestorSQLite.getAlias(toponimo));
+            } else {
+                model.addAttribute("alias", "No disponible");
+            }
+
             gestorSQLite.addUbicacionPrevia(toponimo, fecha.toString());
 
             if ( ubic.getNombre()== null || !ubic.getNombre().equals(gestorSQLite.formatearToponimo(toponimo))){

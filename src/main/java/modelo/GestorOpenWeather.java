@@ -33,7 +33,7 @@ public class GestorOpenWeather extends Servicio {
 
     public ArrayList<HashMap<String, String>> peticion(String location) {
         String API_KEY = "274e1792cb0eafe92c73ae399374342a";
-        String myUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + API_KEY + "&units=Metric";
+        String myUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + API_KEY + "&units=Metric&lang=es";
         ArrayList<HashMap<String, String>> resp = new ArrayList<>();
         try {
             StringBuilder result = new StringBuilder();

@@ -37,8 +37,11 @@ public class IndexController {
         }
 
         String temp1 = null, temp2 = null, temp3 = null;
+        String descrip1 = null, descrip2 = null, descrip3 = null;
+
         if(ubic1 != ""){
             temp1 = gestorOpenWeather.peticion(ubic1).get(0).get("Temperature");
+            descrip1 = gestorOpenWeather.peticion(ubic1).get(0).get("Weather description");
             model.addAttribute("ubicacion1",ubic1);
         }else{
             ubic1 = " ";
@@ -47,6 +50,7 @@ public class IndexController {
 
         if(ubic2 != "") {
             temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+            descrip2 = gestorOpenWeather.peticion(ubic2).get(0).get("Weather description");
             model.addAttribute("ubicacion2",ubic2);
         }else{
             ubic2 = " ";
@@ -55,6 +59,7 @@ public class IndexController {
         }
         if(ubic3 != "") {
             temp3 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+            descrip3 = gestorOpenWeather.peticion(ubic3).get(0).get("Weather description");
             model.addAttribute("ubicacion3",ubic3);
         }else{
             ubic3 = " ";
@@ -63,22 +68,45 @@ public class IndexController {
 
 
         if(temp1 != null){
-            model.addAttribute("temp1",temp1 + "ºC ("+ubic1+")");
+            model.addAttribute("temp1",temp1 + "ºC");
         }else{
             temp1 = " ";
             model.addAttribute("temp1",temp1 + ubic1);
         }
+
         if(temp2 != null){
-            model.addAttribute("temp2",temp2 + "ºC ("+ubic2+")");
+            model.addAttribute("temp2",temp2 + "ºC");
         }else{
             temp2 = " ";
             model.addAttribute("temp2",temp2 + ubic2);
         }
+
         if(temp3 != null){
-            model.addAttribute("temp3",temp3 + "ºC ("+ubic3+")");
+            model.addAttribute("temp3",temp3 + "ºC");
         }else{
             temp3 = " ";
             model.addAttribute("temp3",temp3 + ubic3 );
+        }
+
+        if(descrip1 != null){
+            model.addAttribute("descrip1",descrip1 + "");
+        }else{
+            descrip1 = " ";
+            model.addAttribute("descrip1",descrip1 + "");
+        }
+
+        if(descrip2 != null){
+            model.addAttribute("descrip2",descrip2 + "");
+        }else{
+            descrip2 = " ";
+            model.addAttribute("descrip2",descrip2 + "");
+        }
+
+        if(descrip3 != null){
+            model.addAttribute("descrip3",descrip3 + "");
+        }else{
+            descrip3 = " ";
+            model.addAttribute("descrip3",descrip3 + "");;
         }
 
         return "principal";

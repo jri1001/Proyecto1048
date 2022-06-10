@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="../static/css/style.css"
+          th:href="@{../../css/style.css}" rel="stylesheet" media="screen"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+    btn[i].classList.toggle("dark-mode-btn");
+}
+  }
+  </script>
+    <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+    <div class="container">
+        <ul>
+            <li><div class="cont-dark">
+                <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+                </label>
+            </div></li>
+            <li><a href="../../principal">Inicio</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Ubicaciones</a>
+                <div class="dropdown-content">
+                    <a style="font-size: 15px;" href="/ubicacion/list-activas">Ubicaciones activas</a>
+                    <a style="font-size: 15px;" href="/ubicacion/list-NoActivas">Ubicaciones No activas</a>
+                    <a style="font-size: 15px;" href="/ubicacion/list-previas">Historial de Ubicaciones</a>
+                    <a style="font-size: 15px;" href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+                    <a style="font-size: 15px;" href="../../ubicacion/gruposUbicacion">Grupos de Ubicaciones </a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Servicios</a>
+                <div class="dropdown-content">
+                    <a style="font-size: 15px;" href="/servicios/InfoServicios">Servicios Disponibles</a>
+                    <a style="font-size: 15px;" href="/servicios/servicios-activos">Servicios activos</a>
+                </div>
+            </li>
+            <li><a href="/servicios/info">Noticias</a></li>
+            <li><a href="/servicios/eventos">Eventos</a></li>
+            <li><a href="/meteorologia">Meteorologia</a></li>
+        </ul>
+    </div>
+</nav>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver atrás</button>
+<div class="add-ubic-container">
+    <h1 style="font-size: 24px;">Activar Servicio</h1>
+    <form th:action="@{'../../servicios/activar-servicio-ubic/'+${toponimo}}"  method="post" class="add-form">
+        <label for="ubic" class="add-label">Ubicacion</label><br>
+        <input class="add-input" type="text" id="ubic" name="ubic" th:value="${toponimo}" readonly><br>
+        <label for="servicio" class="add-label">Nombre del Servicio</label><br>
+        <input class="add-input" type="text" id="servicio" name="servicio" placeholder="Servicio"><br>
+        <input id="btn-add-ubic" class="btn btn-add-ubic" type="submit" value="Activar">
+        <h3 style="color:orange"><span th:text="${mensaje}"></span></h3>
+    </form>
+</div>
+</body>
+</html>

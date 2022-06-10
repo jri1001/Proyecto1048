@@ -160,12 +160,18 @@ li.dropdown {
  font-family: 'Open Sans', sans-serif;
 }
 
-.titulo-noticias h1, .titulo-activas h1, .titulo-previas h1 {
+.titulo-noticias h1, .titulo-activas h1, .titulo-previas h1, .box-1 h1 {
   padding-left: 2%;
   margin: 4%;
   text-align: left;
   font-size: 2.5em;
   color: rgb(219, 219, 219);
+ font-family: 'Open Sans', sans-serif;
+ letter-spacing: 2px;
+}
+
+.info-temp h2 {
+  color: rgb(219, 219, 229);
  font-family: 'Open Sans', sans-serif;
  letter-spacing: 2px;
 }

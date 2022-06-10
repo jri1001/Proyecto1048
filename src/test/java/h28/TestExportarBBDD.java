@@ -35,6 +35,7 @@ public class TestExportarBBDD {
         Map<String,Ubicacion> lista=gestorMain.getListaUbicaciones();
 
         //When
+        //TODO: No funciona
        // gestorMain.copiarDB("test2.db");
         gestorMain.syncDB();
 

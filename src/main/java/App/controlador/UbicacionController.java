@@ -132,7 +132,7 @@ public class UbicacionController {
                         listaServicios.put(servicio, ruta);
                     }
                     if (servicio.equals("TicketMaster")) {
-                        String ruta = "../../servicios/eventos";
+                        String ruta = "../../servicios/list_event/"+ toponimo;
                         listaServicios.put(servicio, ruta);
                     }
                     if (servicio.equals("OpenWeather")) {

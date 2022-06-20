@@ -40,8 +40,10 @@ public class IndexController {
         String descrip1 = null, descrip2 = null, descrip3 = null;
 
         if(ubic1 != ""){
-            temp1 = gestorOpenWeather.peticion(ubic1).get(0).get("Temperature");
-            descrip1 = gestorOpenWeather.peticion(ubic1).get(0).get("Weather description");
+            if(gestorOpenWeather.peticion(ubic1).size()>0){
+                temp1 = gestorOpenWeather.peticion(ubic1).get(0).get("Temperature");
+                descrip1 = gestorOpenWeather.peticion(ubic1).get(0).get("Weather description");
+            } else{temp1="--";descrip1="Temperatura no disponible en este momento.";}
             model.addAttribute("ubicacion1",ubic1);
         }else{
             ubic1 = " ";
@@ -49,8 +51,10 @@ public class IndexController {
         }
 
         if(ubic2 != "") {
-            temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
-            descrip2 = gestorOpenWeather.peticion(ubic2).get(0).get("Weather description");
+            if(gestorOpenWeather.peticion(ubic2).size()>0){
+                temp2 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
+                descrip2 = gestorOpenWeather.peticion(ubic2).get(0).get("Weather description");
+            } else{temp2="--";descrip2="Temperatura no disponible en este momento.";}
             model.addAttribute("ubicacion2",ubic2);
         }else{
             ubic2 = " ";
@@ -58,8 +62,10 @@ public class IndexController {
 
         }
         if(ubic3 != "") {
-            temp3 = gestorOpenWeather.peticion(ubic2).get(0).get("Temperature");
-            descrip3 = gestorOpenWeather.peticion(ubic3).get(0).get("Weather description");
+            if(gestorOpenWeather.peticion(ubic3).size()>0){
+                temp3 = gestorOpenWeather.peticion(ubic3).get(0).get("Temperature");
+                descrip3 = gestorOpenWeather.peticion(ubic3).get(0).get("Weather description");
+            } else{temp3="--";descrip3="Temperatura no disponible en este momento.";}
             model.addAttribute("ubicacion3",ubic3);
         }else{
             ubic3 = " ";
